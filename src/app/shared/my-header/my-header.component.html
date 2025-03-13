@@ -1,28 +1,29 @@
-<nav className="bg-white shadow-sm fixed w-full top-0 z-50">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex justify-between h-16">
-        <div className="flex items-center">
-          <!-- <lucide-stethoscope  className="h-8 w-8 text-blue-600" /> -->
-          <span className="ml-2 text-xl font-bold text-gray-900">MediCare</span>
+<nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <!-- <lucide-stethoscope  class="h-8 w-8 text-blue-600" /> -->
+          <span class="ml-2 text-xl font-bold text-gray-900">GaragePro</span>
         </div>
         
-        <!-- {/* Desktop Navigation */} -->
-        <div className="hidden md:flex items-center space-x-8">
-          <a href="#" className="text-gray-700 hover:text-blue-600">Home</a>
-          <a href="#" className="text-gray-700 hover:text-blue-600">Services</a>
-          <a href="#" className="text-gray-700 hover:text-blue-600">Doctors</a>
-          <a href="#" className="text-gray-700 hover:text-blue-600">About</a>
-          <a href="#" className="text-gray-700 hover:text-blue-600">Contact</a>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-            Book Appointment
-          </button>
+        <!-- {/* Desktop Navigation */} --> 
+        <div class="hidden md:flex items-center space-x-8">
+          <a routerLink="/home" class="text-gray-700 hover:text-blue-600">Acceuil</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600">Nos services</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600">Qui sommes-nous</a>
+          <a routerLink="/login">
+
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+              Se connecter
+            </button>
+          </a>
         </div>
 
         <!-- {/* Mobile menu button */} -->
-        <div className="md:hidden flex items-center">
+        <div class="md:hidden flex items-center">
           <button
           (click)="toggleMenu()"
-            className="text-gray-700"
+            class="text-gray-700"
           >
           @if(!isMenuOpen){
 
@@ -41,14 +42,14 @@
     <!-- {/* Mobile Navigation */} -->
      @if(isMenuOpen){
 
-         <div  className="md:hidden">
-           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-             <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Home</a>
-             <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Services</a>
-             <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Doctors</a>
-             <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">About</a>
-             <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Contact</a>
-             <button className="w-full mt-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+         <div  class="md:hidden">
+           <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+             <a href="#" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Home</a>
+             <a href="#" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Services</a>
+             <a href="#" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Doctors</a>
+             <a href="#" class="block px-3 py-2 text-gray-700 hover:text-blue-600">About</a>
+             <a href="#" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Contact</a>
+             <button class="w-full mt-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                Book Appointment
              </button>
            </div>
