@@ -3,14 +3,16 @@ import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { HomeComponent } from './pages/home/home.component';
+import { UserComponent } from './pages/user/user.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: AppLayoutComponent, // Applying default layout
+        component: AppLayoutComponent,
         children: [
           { path: 'login', component: LoginComponent },
           { path: 'home', component: HomeComponent },
+          { path: 'user', component: UserComponent },
           { path: '', redirectTo: '/home', pathMatch: 'full'},
         ]
     },
