@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class UserComponent implements OnInit {
+  showEditModal = false;
+  selectedUser: any = {};
+
   utilisateurs: any[] = [];
   filteredUsers: any[] = [];
   roles: any[] = [];
@@ -52,6 +55,29 @@ export class UserComponent implements OnInit {
       : this.utilisateurs;
   }
 
+  openEditModal(user: any) {
+    this.selectedUser = { ...user };
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+  }
+
+  onUpdateUser() {
+    const apiUrl = `http://localhost:5000/users/${this.selectedUser._id}`;
+
+    this.http.put(apiUrl, this.selectedUser).subscribe({
+      next: (response) => {
+        console.log('Utilisateur mis à jour', response);
+        this.closeEditModal();
+      },
+      error: (err) => {
+        console.error('Erreur lors de la mise à jour de l\'utilisateur', err);
+      }
+    });
+  }
+
   onSubmit() {
     if (this.newUser.name && this.newUser.surname && this.newUser.mail && this.newUser.pswd && this.newUser.role) {
       const userData = {
@@ -71,6 +97,21 @@ export class UserComponent implements OnInit {
         },
         error: (err) => {
           console.error('Erreur lors de l\'ajout de l\'utilisateur:', err);
+        }
+      });
+    }
+  }
+
+  onDelete(userId: string) {
+    if (confirm('Voulez-vous vraiment supprimer cet utilisateur ?')) {
+      this.http.delete(`http://localhost:5000/users/${userId}`).subscribe({
+        next: () => {
+          console.log('Utilisateur supprimé avec succès');
+          this.utilisateurs = this.utilisateurs.filter(user => user._id !== userId);
+          this.filteredUsers = [...this.utilisateurs];
+        },
+        error: (err) => {
+          console.error("Erreur lors de la suppression de l'utilisateur:", err);
         }
       });
     }
