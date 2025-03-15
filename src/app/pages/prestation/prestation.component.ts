@@ -5,10 +5,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrestationListComponent } from '@/components/prestation/prestation-list/prestation-list.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-prestation',
-  imports: [CommonModule, PrestationListComponent, FormsModule],
+  imports: [CommonModule, PrestationListComponent, FormsModule, RouterModule],
   templateUrl: './prestation.component.html',
   styleUrl: './prestation.component.css'
 })

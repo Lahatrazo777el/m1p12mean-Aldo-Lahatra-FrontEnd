@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-prestation-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './prestation-list.component.html',
   styleUrl: './prestation-list.component.css'
 })
