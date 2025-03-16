@@ -30,4 +30,9 @@ export class PrestationComponent implements OnInit {
   filterData(): void{
     this.loadPrestations({search: this.searchTerm});
   }
+
+  deleteService(serviceId: string): void{
+    this.prestationService.deletePrestation(serviceId).subscribe(() => this.loadPrestations());
+  }
+    
 }

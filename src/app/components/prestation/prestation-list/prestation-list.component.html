@@ -10,9 +10,16 @@
 
               <span class="text-blue-600 cursor-pointer">Modifier</span>
             </a>
-            <span class="text-red-500 cursor-pointer">Supprimer</span>
+            <span class="text-red-500 cursor-pointer" (click)="showModal(prestation._id)">Supprimer</span>
+
           </div>
         </div>
     }
-    
+    @if(isModalVisible){
+
+      <app-simple-modal (close)="hideModal()" (action)="deleteService()">
+        <span title>Supprimer un service</span>
+        <span description>Voulez-vous vraiment supprimer ce service</span>
+      </app-simple-modal>
+    }
   </div>

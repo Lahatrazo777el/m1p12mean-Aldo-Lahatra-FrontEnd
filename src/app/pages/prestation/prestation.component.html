@@ -17,6 +17,6 @@
           </button>
         </a>
       </div>
-      <app-prestation-list [prestations]="prestations"/>  
+      <app-prestation-list [prestations]="prestations" (delete)="deleteService($event)"/>  
     </div>
   </div>
