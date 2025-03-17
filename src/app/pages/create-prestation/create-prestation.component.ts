@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
   styleUrl: './create-prestation.component.css'
 })
 export class CreatePrestationComponent {
-  prestation = {name: '', price: 0, duration: '00:00'};
+  prestation = {name: '', price: '', duration: '00:00'};
 
   constructor(private prestationService: PrestationService, private router: Router) {}
 
   onSubmit():void {
     this.prestationService.addPrestation(this.prestation).subscribe(() => this.router.navigate(['/prestations']))
-    console.log(this.prestation);
+   
   }
 }

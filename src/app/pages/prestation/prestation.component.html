@@ -17,6 +17,13 @@
           </button>
         </a>
       </div>
-      <app-prestation-list [prestations]="prestations" (delete)="deleteService($event)"/>  
+      
+      @if(prestations.length > 0 ){
+
+        <app-prestation-list [prestations]="prestations" (delete)="deleteService($event)"/>  
+      } @else {
+        <p>Aucune donnée disponible</p>
+      }
+
     </div>
   </div>

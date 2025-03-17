@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { PrestationComponent } from './pages/prestation/prestation.component';
 import { CreatePrestationComponent } from './pages/create-prestation/create-prestation.component';
 import { EditPrestationComponent } from './pages/edit-prestation/edit-prestation.component';
+import { CreateRepairHistoryComponent } from './pages/create-repair-history/create-repair-history.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +18,8 @@ export const routes: Routes = [
           { path: 'home', component: HomeComponent },
           { path: 'prestations', component: PrestationComponent },
           { path: 'prestations/create', component: CreatePrestationComponent},
-          { path: 'prestations/:id', component: EditPrestationComponent}
+          { path: 'prestations/:id', component: EditPrestationComponent},
+          { path: 'repair-histories/create', component: CreateRepairHistoryComponent},
         ]
     },
     { path: '**', component: PageNotFoundComponent}
