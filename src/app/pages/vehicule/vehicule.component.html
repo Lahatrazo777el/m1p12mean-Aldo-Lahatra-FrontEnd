@@ -1,0 +1,65 @@
+<div class="p-6 bg-gray-100 min-h-screen">
+
+    <h2 class="text-2xl font-bold mb-4">Ajouter un action - client</h2>
+  <div class="mb-6 bg-white p-4 rounded-lg shadow-md">
+
+    <form (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label for="name" class="font-semibold">Nom :</label>
+        <input type="text" id="name" name="name" [(ngModel)]="newVehicule.name" required
+               class="border border-gray-300 rounded px-3 py-1 w-full">
+      </div>
+
+      <div>
+        <label for="numero" class="font-semibold">Numero :</label>
+        <input type="text" id="numero" name="numero" [(ngModel)]="newVehicule.numero" required
+               class="border border-gray-300 rounded px-3 py-1 w-full">
+      </div>
+
+    <div>
+        <label for="user" class="font-semibold">utilisateur :</label>
+        <select id="user" name="user" [(ngModel)]="newVehicule.user" required class="border border-gray-300 rounded px-3 py-1 w-full">
+          <option value="">Sélectionner un client</option>
+          <option *ngFor="let user of utilisateurs" [value]="user._id">{{ user.name }}</option>
+        </select>
+    </div>
+
+      <div>
+        <label for="typevehicule" class="font-semibold">type de transport :</label>
+        <select id="typevehicule" name="typevehicule" [(ngModel)]="newVehicule.typevehicule" required
+                class="border border-gray-300 rounded px-3 py-1 w-full">
+          <option value="">Sélectionner un rôle</option>
+          <option *ngFor="let role of typevehicule" [value]="role._id">{{ role.name }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Ajouter</button>
+    </form>
+  </div>
+
+    <h2 class="text-2xl font-bold mb-4">Liste des transports</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+          <thead class="bg-gray-800 text-white">
+            <tr>
+              <th class="py-3 px-6 text-left">Nom</th>
+              <th class="py-3 px-6 text-left">Numero</th>
+              <th class="py-3 px-6 text-left">Client</th>
+              <th class="py-3 px-6 text-left">Type de transport</th>
+              <th class="py-3 px-6 text-left"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let vec of vehicule" class="border-b hover:bg-gray-100">
+              <td class="py-2 px-6 font-semibold">{{ vec.name }}</td>
+              <td class="py-2 px-6 font-semibold">{{ vec.number }}</td>
+              <td class="py-2 px-6 font-semibold">{{ vec.user?.name }}</td>
+              <td class="py-2 px-6 font-semibold">{{ vec.typevehicule?.name }}</td>
+              <td class="py-2 px-6">
+                <button (click)="onDelete(vec._id)" class="bg-red-500 text-white px-3 py-1 rounded">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
