@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { TypevehiculeService } from '@/services/typevehicule.service';
 
 @Component({
   selector: 'app-type-vehicule',
@@ -15,10 +15,10 @@ export class TypeVehiculeComponent {
     name: ''
   };
 
-    constructor(private http: HttpClient) {}
+    constructor(private typeVehiculeService: TypevehiculeService) {}
 
     ngOnInit() {
-      this.http.get<any[]>('http://localhost:5000/typevehicule').subscribe({
+      this.typeVehiculeService.getAllTypeVehicule().subscribe({
         next: (data) => {
           this.TypeVehicule = data;
         },
@@ -34,7 +34,7 @@ export class TypeVehiculeComponent {
         name: this.newTypeVehicule.name
       };
 
-      this.http.post('http://localhost:5000/typevehicule', typeVehiculeData).subscribe({
+      this.typeVehiculeService.addTypeVehicule(typeVehiculeData).subscribe({
         next: (response) => {
           console.log('Type Vehicule ajouté avec succès:', response);
           this.TypeVehicule.push(response);
