@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import 'select2';
+import { VehiculeService } from '@/services/vehicule.service';
+import { UserService } from '@/services/user.service';
+import { TypevehiculeService } from '@/services/typevehicule.service';
 
 @Component({
   selector: 'app-vehicule',
@@ -39,10 +42,10 @@ showEditModal = false;
   }
   
 
-  constructor(private http: HttpClient) {}
+  constructor(private vehiculeService: VehiculeService,private userService: UserService,private typeVehiculeService: TypevehiculeService,private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<any[]>('http://localhost:5000/users').subscribe({
+    this.userService.getUserByRole('Client').subscribe({
       next: (data) => {
         this.utilisateurs = data;
       },
@@ -51,7 +54,7 @@ showEditModal = false;
       }
     });
 
-    this.http.get<any[]>('http://localhost:5000/typevehicule').subscribe({
+    this.typeVehiculeService.getAllTypeVehicule().subscribe({
       next: (data) => {
         this.typevehicule = data;
       },
@@ -60,7 +63,7 @@ showEditModal = false;
       }
     });
 
-    this.http.get<any[]>('http://localhost:5000/vehicules').subscribe({
+    this.vehiculeService.getAllVehicule().subscribe({
       next: (data) => {
         this.vehicule = data;
       },
@@ -72,14 +75,14 @@ showEditModal = false;
 
   onSubmit() {
     if (this.newVehicule.name && this.newVehicule.numero && this.newVehicule.typevehicule && this.newVehicule.user) {
-      const userData = {
+      const vehiculeData = {
         name: this.newVehicule.name,
         number: this.newVehicule.numero,
         typevehiculeId: this.newVehicule.typevehicule,
         userId: this.newVehicule.user
       };
   
-      this.http.post('http://localhost:5000/vehicules', userData).subscribe({
+      this.vehiculeService.addVehicule(vehiculeData).subscribe({
         next: (response) => {
           console.log('Véhicule ajouté avec succès:', response);
           this.vehicule.push(response);
@@ -102,7 +105,7 @@ showEditModal = false;
   
   onDelete(vehiculeId: string) {
     if (confirm('Voulez-vous vraiment supprimer cet vehicule ?')) {
-      this.http.delete(`http://localhost:5000/vehicules/${vehiculeId}`).subscribe({
+      this.vehiculeService.deleteVehicule(vehiculeId).subscribe({
         next: () => {
           console.log('vehicule supprimé avec succès');
           this.vehicule = this.vehicule.filter(v => v._id !== vehiculeId);
