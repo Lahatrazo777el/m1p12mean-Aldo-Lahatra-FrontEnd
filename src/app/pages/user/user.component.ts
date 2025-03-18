@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '@/services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -26,10 +27,10 @@ export class UserComponent implements OnInit {
     role: ''
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private userService: UserService,private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<any[]>('http://localhost:5000/users').subscribe({
+    this.userService.getAllUser().subscribe({
       next: (data) => {
         this.utilisateurs = data;
         this.filteredUsers = data;
@@ -65,9 +66,7 @@ export class UserComponent implements OnInit {
   }
 
   onUpdateUser() {
-    const apiUrl = `http://localhost:5000/users/${this.selectedUser._id}`;
-
-    this.http.put(apiUrl, this.selectedUser).subscribe({
+    this.userService.updateUser(this.selectedUser._id,this.selectedUser).subscribe({
       next: (response) => {
         console.log('Utilisateur mis à jour', response);
         this.closeEditModal();
@@ -88,7 +87,7 @@ export class UserComponent implements OnInit {
         roleId: this.newUser.role
       };
 
-      this.http.post('http://localhost:5000/users', userData).subscribe({
+      this.userService.addUser(userData).subscribe({
         next: (response) => {
           console.log('Utilisateur ajouté avec succès:', response);
           this.utilisateurs.push(response);
@@ -96,7 +95,7 @@ export class UserComponent implements OnInit {
           this.newUser = { name: '', surname: '', mail: '', pswd: '', role: '' };
         },
         error: (err) => {
-          console.error('Erreur lors de l\'ajout de l\'utilisateur:', err);
+          console.error("Erreur lors de l'ajout de l'utilisateur:", err);
         }
       });
     }
@@ -104,7 +103,7 @@ export class UserComponent implements OnInit {
 
   onDelete(userId: string) {
     if (confirm('Voulez-vous vraiment supprimer cet utilisateur ?')) {
-      this.http.delete(`http://localhost:5000/users/${userId}`).subscribe({
+      this.userService.deleteUser(userId).subscribe({
         next: () => {
           console.log('Utilisateur supprimé avec succès');
           this.utilisateurs = this.utilisateurs.filter(user => user._id !== userId);
