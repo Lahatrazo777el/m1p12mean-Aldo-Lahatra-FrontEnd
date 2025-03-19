@@ -7,6 +7,7 @@ import { UserComponent } from './pages/user/user.component';
 import { TypeVehiculeComponent } from './pages/type-vehicule/type-vehicule.component';
 import { VehiculeComponent } from './pages/vehicule/vehicule.component';
 import { PrestationComponent } from './pages/prestation/prestation.component';
+import { AjoutRdvComponent } from './pages/ajout-rdv/ajout-rdv.component';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,7 @@ export const routes: Routes = [
           { path: 'type-vehicule', component: TypeVehiculeComponent},
           { path: 'prestation', component: PrestationComponent },
           { path: 'vehicule', component: VehiculeComponent},
+          { path: 'ajout-rendezvous', component: AjoutRdvComponent},
           { path: '', redirectTo: '/home', pathMatch: 'full'},
         ]
     },
