@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RepairHistoryService {
-  private apiUrl = `${environment.apiUrl}/repair-history`;
+  private apiUrl = `${environment.apiUrl}/repair-histories`;
   constructor(private http: HttpClient) { }
 
   getRepairHistories(params?: any): Observable<any>{

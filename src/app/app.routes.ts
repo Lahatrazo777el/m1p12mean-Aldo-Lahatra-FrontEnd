@@ -10,6 +10,7 @@ import { PrestationComponent } from './pages/prestation/prestation.component';
 import { CreatePrestationComponent } from './pages/create-prestation/create-prestation.component';
 import { EditPrestationComponent } from './pages/edit-prestation/edit-prestation.component';
 import { CreateRepairHistoryComponent } from './pages/create-repair-history/create-repair-history.component';
+import { RepairHistoryComponent } from './pages/repair-history/repair-history.component';
 
 export const routes: Routes = [
     {
@@ -22,6 +23,7 @@ export const routes: Routes = [
           { path: 'prestations/create', component: CreatePrestationComponent},
           { path: 'prestations/:id', component: EditPrestationComponent},
           { path: 'repair-histories/create', component: CreateRepairHistoryComponent},
+          { path: 'repair-histories', component: RepairHistoryComponent},
           { path: 'user', component: UserComponent },
           { path: 'type-vehicule', component: TypeVehiculeComponent},
           { path: 'prestation', component: PrestationComponent },
