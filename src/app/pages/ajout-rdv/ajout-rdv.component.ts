@@ -14,22 +14,71 @@ import { jwtDecode } from 'jwt-decode';
   styleUrl: './ajout-rdv.component.css'
 })
 export class AjoutRdvComponent {
+  today: string;
+  rdv: any[] = [];
   prestation: any[] = [];
   formData = {
     prestationId: '',
     dateTime: ''
   };
-  constructor(private authService: AuthService, private rdvService: RdvService, private prestationService: PrestationService, private router: Router) {}
-
+  constructor(
+    private authService: AuthService,
+    private rdvService: RdvService,
+    private prestationService: PrestationService,
+    private router: Router
+  ) {
+    const now = new Date();
+    this.today = now.toISOString().slice(0, 16);
+  }
   ngOnInit() {
-    this.prestationService.getPrestations().subscribe({
-      next: (data) => {
-        this.prestation = data;
-      },
-      error: (err) => {
-        console.error('Erreur lors de la récupération des préstations', err);
+    const token = this.authService.getToken();
+    if (!token) {
+      console.error("Utilisateur non connecté !");
+      alert("Vous devez être connecté pour accéder à cette page !");
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    try {
+      const decodedToken: any = jwtDecode(token);
+      const clientId = decodedToken.userId;
+      if (!clientId) {
+        console.error("utilisateur non autorisé !");
+        this.router.navigate(['/login']);
+        return;
       }
-    });
+
+      this.prestationService.getPrestations().subscribe({
+        next: (data) => {
+          this.prestation = data;
+        },
+        error: (err) => {
+          console.error('Erreur lors de la récupération des prestations', err);
+        }
+      });
+
+      this.rdvService.getRdvByUser(clientId).subscribe({
+        next: (data) => {
+          this.rdv = data;
+        },
+        error: (err) => {
+          console.error('Erreur lors de la récupération des rendez-vous', err);
+        }
+      });
+    } catch (err) {
+      console.error("Erreur lors du décodage du token :", err);
+      this.router.navigate(['/login']);
+    }
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('fr-FR');
+  }
+
+  formatTime(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
   }
 
   onSubmit(): void {
@@ -62,7 +111,7 @@ export class AjoutRdvComponent {
       this.rdvService.addRdv(requestData).subscribe(
         response => {
           console.log("Réservation réussie !", response);
-          alert("Réservation réussie !");
+          this.rdv.push(response);
           this.formData = {
             prestationId: '',
             dateTime: ''
