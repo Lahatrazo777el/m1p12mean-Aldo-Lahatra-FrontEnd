@@ -11,6 +11,8 @@ import { CreatePrestationComponent } from './pages/create-prestation/create-pres
 import { EditPrestationComponent } from './pages/edit-prestation/edit-prestation.component';
 import { CreateRepairHistoryComponent } from './pages/create-repair-history/create-repair-history.component';
 import { RepairHistoryComponent } from './pages/repair-history/repair-history.component';
+import { AjoutRdvComponent } from './pages/ajout-rdv/ajout-rdv.component';
+import { InscriptionComponent } from './pages/inscription/inscription.component';
 
 export const routes: Routes = [
     {
@@ -18,6 +20,7 @@ export const routes: Routes = [
         component: AppLayoutComponent,
         children: [
           { path: 'login', component: LoginComponent },
+          { path: 'inscription', component: InscriptionComponent },
           { path: 'home', component: HomeComponent },
           { path: 'prestations', component: PrestationComponent },
           { path: 'prestations/create', component: CreatePrestationComponent},
@@ -28,6 +31,7 @@ export const routes: Routes = [
           { path: 'type-vehicule', component: TypeVehiculeComponent},
           { path: 'prestation', component: PrestationComponent },
           { path: 'vehicule', component: VehiculeComponent},
+          { path: 'ajout-rendezvous', component: AjoutRdvComponent},
           { path: '', redirectTo: '/home', pathMatch: 'full'},
         ]
     },
