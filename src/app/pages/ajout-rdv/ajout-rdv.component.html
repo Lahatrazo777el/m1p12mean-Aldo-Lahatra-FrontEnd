@@ -35,11 +35,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let transport of rdv; let i = index" class="border-b hover:bg-gray-100">
-                        <td class="py-2 px-6">{{ formatDate(transport.createdAt) }}</td>
-                        <td class="py-2 px-6 font-semibold">{{ transport.prestation?.name }}</td>
-                        <td class="py-2 px-6 font-semibold">{{ formatDate(transport.date_rdv) }}</td>
-                        <td class="py-2 px-6 font-semibold">{{ formatTime(transport.date_rdv) }}</td>
+                    <tr *ngFor="let rendezvous of rdv; let i = index" class="border-b hover:bg-gray-100">
+                        <td class="py-2 px-6">{{ formatDate(rendezvous.createdAt) }}</td>
+                        <td class="py-2 px-6 font-semibold">{{ rendezvous.prestation?.name }}</td>
+                        <td class="py-2 px-6 font-semibold">{{ formatDate(rendezvous.date_rdv) }}</td>
+                        <td class="py-2 px-6 font-semibold">{{ formatTime(rendezvous.date_rdv) }}</td>
                         <td class="py-2 px-6 font-semibold">
                             <button type="button" class="bg-red-500 text-white px-2 py-2 rounded">Annuler</button>
                         </td>

@@ -8,6 +8,7 @@ import { TypeVehiculeComponent } from './pages/type-vehicule/type-vehicule.compo
 import { VehiculeComponent } from './pages/vehicule/vehicule.component';
 import { PrestationComponent } from './pages/prestation/prestation.component';
 import { AjoutRdvComponent } from './pages/ajout-rdv/ajout-rdv.component';
+import { InscriptionComponent } from './pages/inscription/inscription.component';
 
 export const routes: Routes = [
     {
@@ -15,6 +16,7 @@ export const routes: Routes = [
         component: AppLayoutComponent,
         children: [
           { path: 'login', component: LoginComponent },
+          { path: 'inscription', component: InscriptionComponent },
           { path: 'home', component: HomeComponent },
           { path: 'user', component: UserComponent },
           { path: 'type-vehicule', component: TypeVehiculeComponent},
