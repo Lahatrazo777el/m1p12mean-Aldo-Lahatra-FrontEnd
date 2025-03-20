@@ -1,7 +1,7 @@
 <div class=" flex items-center justify-center p-4">
     <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
       <h1 class="text-3xl font-bold text-center mb-6">Ajouter une facture</h1>
-      
+      <div class="text-red-500" *ngIf="errorMsg">{{ errorMsg }}</div>
       <form class="space-y-6" #myForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="space-y-4">
           <label class="block">
@@ -21,7 +21,7 @@
 
           <label class="block">
             <span class="text-gray-700">Client</span>
-            <select name="client" id="" [(ngModel)]="history.clientId" required
+            <select name="client" id="" [(ngModel)]="history.clientId" required  (change)="onClientChange()"
             class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500">
                 <option value="" disabled>Choisir un client</option>
                 @for (client of clients; track client._id) {
@@ -36,7 +36,10 @@
             <select name="client" id="" [(ngModel)]="history.vehiculeId" required
             class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500">
                 <option value="" disabled>Choisir un véhicule</option>
-                
+                @for (vehicule of vehiculeClient; track vehicule._id) {
+    
+                    <option [value]="vehicule._id">{{vehicule.name}}</option>
+                }
             </select>
           </label>
 
