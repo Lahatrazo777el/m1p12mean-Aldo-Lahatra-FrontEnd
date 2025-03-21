@@ -12,6 +12,12 @@ export class RdvService {
   addRdv(data : any): Observable<any>{
     return this.http.post(this.apiUrl,data);
   }
+  validaterdv(id : string): Observable<any>{
+    return this.http.post(`${this.apiUrl}/validate/${id}`,null);
+  }
+  cancelrdv(id : string): Observable<any>{
+    return this.http.post(`${this.apiUrl}/${id}`,null);
+  }
   getrdv(): Observable<any>{
     return this.http.get(this.apiUrl);
   }

@@ -1,0 +1,52 @@
+<div class="calendar-container max-w-5xl mx-auto my-6 p-8 bg-white border border-gray-200 rounded-xl shadow-lg">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Calendrier des Rendez-vous</h2>
+  
+    <div class="calendar flex justify-between items-center mb-6">
+      <button (click)="navigateMonth('prev')" class="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200 ease-in-out">
+        <<
+      </button>
+      <span class="text-2xl font-semibold text-gray-700">{{ currentMonth + 1 }} / {{ currentYear }}</span>
+      <button (click)="navigateMonth('next')" class="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200 ease-in-out">
+        >>
+      </button>
+    </div>
+  
+    <div class="calendar-grid grid grid-cols-7 gap-4">
+      <div class="text-center font-semibold text-lg text-gray-600">Lun</div>
+      <div class="text-center font-semibold text-lg text-gray-600">Mar</div>
+      <div class="text-center font-semibold text-lg text-gray-600">Mer</div>
+      <div class="text-center font-semibold text-lg text-gray-600">Jeu</div>
+      <div class="text-center font-semibold text-lg text-gray-600">Ven</div>
+      <div class="text-center font-semibold text-lg text-gray-600">Sam</div>
+      <div class="text-center font-semibold text-lg text-gray-600">Dim</div>
+      
+      <div *ngFor="let day of daysInMonth" class="text-center p-4 border rounded-lg relative">
+        <div class="text-lg font-semibold text-gray-700">{{ day.getDate() }}</div>
+        
+        <div *ngFor="let appointment of getAppointmentsForDay(day)" 
+             [ngStyle]="{'background-color': getColor(appointment)}" 
+             class="appointment p-2 mt-2 rounded-md shadow-md"
+             [ngClass]="{'pointer-events-none': appointment.type === true || appointment.date_annulation }"
+             (click)="openModal(appointment)">
+          <p class="text-sm font-medium text-gray-800">{{ appointment.client.name }} {{ appointment.client.surname }}</p>
+          <p class="text-xs text-gray-600">{{ appointment.prestation.name }}</p>
+          <p class="text-xs text-gray-500">{{ appointment.date_rdv | date:'HH:mm' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="selectedAppointment" class="fixed inset-0 bg-white bg-opacity-100 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+      <h3 class="text-xl font-bold mb-4">Détails du Rendez-vous</h3>
+      <p><strong>Client:</strong> {{ selectedAppointment.client.name }} {{ selectedAppointment.client.surname }}</p>
+      <p><strong>Prestation:</strong> {{ selectedAppointment.prestation.name }}</p>
+      <p><strong>Date:</strong> {{ selectedAppointment.date_rdv | date:'dd/MM/yyyy HH:mm' }}</p>
+      
+      <div class="flex justify-end gap-4 mt-4">
+        <button (click)="validateAppointment()" class="bg-green-500 text-white px-4 py-2 rounded-md">Valider</button>
+        <button (click)="cancelAppointment()" class="bg-red-500 text-white px-4 py-2 rounded-md">Annuler</button>
+        <button (click)="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded-md">Fermer</button>
+      </div>
+    </div>
+  </div>
