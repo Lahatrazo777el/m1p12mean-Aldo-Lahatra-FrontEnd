@@ -13,6 +13,7 @@ import { CreateRepairHistoryComponent } from './pages/create-repair-history/crea
 import { RepairHistoryComponent } from './pages/repair-history/repair-history.component';
 import { AjoutRdvComponent } from './pages/ajout-rdv/ajout-rdv.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -23,13 +24,12 @@ export const routes: Routes = [
           { path: 'inscription', component: InscriptionComponent },
           { path: 'home', component: HomeComponent },
           { path: 'prestations', component: PrestationComponent },
-          { path: 'prestations/create', component: CreatePrestationComponent},
-          { path: 'prestations/:id', component: EditPrestationComponent},
-          { path: 'repair-histories/create', component: CreateRepairHistoryComponent},
-          { path: 'repair-histories', component: RepairHistoryComponent},
+          { path: 'prestations/create', component: CreatePrestationComponent, canActivate: [authGuard]},
+          { path: 'prestations/:id', component: EditPrestationComponent, canActivate: [authGuard]},
+          { path: 'repair-histories/create', component: CreateRepairHistoryComponent, canActivate: [authGuard]},
+          { path: 'repair-histories', component: RepairHistoryComponent, canActivate: [authGuard]},
           { path: 'user', component: UserComponent },
           { path: 'type-vehicule', component: TypeVehiculeComponent},
-          { path: 'prestation', component: PrestationComponent },
           { path: 'vehicule', component: VehiculeComponent},
           { path: 'ajout-rendezvous', component: AjoutRdvComponent},
           { path: '', redirectTo: '/home', pathMatch: 'full'},
