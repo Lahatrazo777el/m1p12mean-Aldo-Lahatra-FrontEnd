@@ -10,7 +10,7 @@
 
           <input type="text" [(ngModel)]="searchTerm" (input)="filterData()" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-0 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rechercher..." />
         </div>
-        <a routerLink="/prestations/create">
+        <a routerLink="/prestations/create" *ngIf="authService.isManager">
 
           <button class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
             Ajouter un service

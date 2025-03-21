@@ -14,6 +14,7 @@ import { RepairHistoryComponent } from './pages/repair-history/repair-history.co
 import { AjoutRdvComponent } from './pages/ajout-rdv/ajout-rdv.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
 import { authGuard } from './guards/auth.guard';
+import { AboutComponent } from './pages/about/about.component';
 
 export const routes: Routes = [
     {
@@ -23,6 +24,7 @@ export const routes: Routes = [
           { path: 'login', component: LoginComponent },
           { path: 'inscription', component: InscriptionComponent },
           { path: 'home', component: HomeComponent },
+          { path: 'about', component: AboutComponent },
           { path: 'prestations', component: PrestationComponent },
           { path: 'prestations/create', component: CreatePrestationComponent, canActivate: [authGuard]},
           { path: 'prestations/:id', component: EditPrestationComponent, canActivate: [authGuard]},

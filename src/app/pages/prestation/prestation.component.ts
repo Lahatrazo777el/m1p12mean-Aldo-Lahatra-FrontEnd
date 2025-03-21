@@ -1,3 +1,4 @@
+import { AuthService } from '@/services/auth.service';
 
 import { PrestationService } from '@/services/prestation.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,7 @@ export class PrestationComponent implements OnInit {
   prestations: any[] = [];
   searchTerm: string = ''; 
 
-  constructor(private prestationService: PrestationService){}
+  constructor(private prestationService: PrestationService, public authService: AuthService){}
 
   ngOnInit(): void {
     this.loadPrestations();

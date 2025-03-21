@@ -1,11 +1,13 @@
+import { AuthService } from '@/services/auth.service';
 
 import { SimpleModalComponent } from '@/shared/simple-modal/simple-modal.component';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-prestation-list',
-  imports: [RouterLink, SimpleModalComponent ],
+  imports: [RouterLink, SimpleModalComponent, CommonModule],
   templateUrl: './prestation-list.component.html',
   styleUrl: './prestation-list.component.css'
 })
@@ -16,7 +18,7 @@ export class PrestationListComponent {
   serviceId: string | null = null;
   isModalVisible = false;
 
-  constructor() {}
+  constructor(public authService: AuthService) {}
 
   showModal(id: string) {
     this.serviceId = id;

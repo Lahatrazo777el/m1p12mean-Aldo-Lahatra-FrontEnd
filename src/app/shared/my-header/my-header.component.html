@@ -10,7 +10,7 @@
         <div class="hidden md:flex items-center space-x-8">
           <a routerLink="/home" class="text-gray-700 hover:text-blue-600">Acceuil</a>
           <a routerLink="/prestations" class="text-gray-700 hover:text-blue-600">Nos services</a>
-          <a href="#" class="text-gray-700 hover:text-blue-600">Qui sommes-nous</a>
+          <a routerLink="/about" class="text-gray-700 hover:text-blue-600">Qui sommes-nous</a>
           <a routerLink="/repair-histories" *ngIf="isLoggedIn" class="text-gray-700 hover:text-blue-600">Factures</a>
           <a routerLink="/repair-histories" *ngIf="isLoggedIn && authService.isMecanicien" class="text-gray-700 hover:text-blue-600">Mes opérations</a>
           <a routerLink="/login" *ngIf="!isLoggedIn">
