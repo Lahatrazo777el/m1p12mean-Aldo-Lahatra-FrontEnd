@@ -13,7 +13,10 @@ export class AuthService {
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isLoggedIn()); // Initial state
 
+  private roleSubject = new BehaviorSubject<null | string>(this.getRole()); // Initial state
+
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable(); // Expose as observable
+  role$ = this.roleSubject.asObservable(); // Expose as observable
 
   constructor(private http: HttpClient) {}
 
@@ -53,6 +56,18 @@ export class AuthService {
 
   getRole(): string | null {
     const user = this.getUser();
-    return user ? user.role : null;
+    return user ? user.role.name : null;
+  }
+
+  get isMecanicien(): boolean {
+    return this.roleSubject.value === 'Mecanicien';
+  }
+  
+  get isManager(): boolean {
+    return this.roleSubject.value === 'Manager';
+  }
+  
+  get isClient(): boolean {
+    return this.roleSubject.value === 'Client';
   }
 }

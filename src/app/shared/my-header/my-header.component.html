@@ -12,6 +12,7 @@
           <a routerLink="/prestations" class="text-gray-700 hover:text-blue-600">Nos services</a>
           <a href="#" class="text-gray-700 hover:text-blue-600">Qui sommes-nous</a>
           <a routerLink="/repair-histories" *ngIf="isLoggedIn" class="text-gray-700 hover:text-blue-600">Factures</a>
+          <a routerLink="/repair-histories" *ngIf="isLoggedIn && authService.isMecanicien" class="text-gray-700 hover:text-blue-600">Mes opérations</a>
           <a routerLink="/login" *ngIf="!isLoggedIn">
 
             <button class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">

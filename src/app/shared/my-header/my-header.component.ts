@@ -13,9 +13,12 @@ import { Subscription } from 'rxjs';
 export class MyHeaderComponent implements OnInit {
   isMenuOpen = false;
   isLoggedIn = false;
-  private authSubscription: Subscription = new Subscription;
+  role: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  private authSubscription: Subscription = new Subscription;
+  private roleSubscription: Subscription = new Subscription;
+
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void{
     this.authSubscription = this.authService.isAuthenticated$.subscribe(
@@ -23,6 +26,12 @@ export class MyHeaderComponent implements OnInit {
         this.isLoggedIn = isAuthenticated;
       }
     );
+
+    this.roleSubscription = this.authService.role$.subscribe((
+      role
+    ) => {
+      this.role = role;
+    })
   }
 
   toggleMenu(){
