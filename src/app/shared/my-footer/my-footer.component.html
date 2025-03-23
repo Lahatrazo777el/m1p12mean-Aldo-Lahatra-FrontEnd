@@ -5,10 +5,10 @@
         <div class="space-y-4">
           <div class="flex items-center">
             <!-- <Stethoscope class="h-8 w-8 text-blue-400" /> -->
-            <span class="ml-2 text-xl font-bold">MediCare</span>
+            <span class="ml-2 text-xl font-bold">GaragePro</span>
           </div>
           <p class="text-gray-400">
-            Providing quality healthcare services for over 20 years.
+            Depuis plus de 20 ans, nous assurons des services automobiles de qualité.
           </p>
           <div class="flex space-x-4">
             <a href="#" class="text-gray-400 hover:text-white">
@@ -28,36 +28,34 @@
 
         <!-- {/* Quick Links */} -->
         <div>
-          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+          <h3 class="text-lg font-semibold mb-4">Liens rapides</h3>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Our Services</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Meet Our Doctors</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Latest News</a></li>
+            <li><a routerLink="/about" class="text-gray-400 hover:text-white">Qui sommes-nous</a></li>
+            <li><a routerLink="/prestations" class="text-gray-400 hover:text-white">Nos Services</a></li>
+            <li><a routerLink="/mecaniciens" class="text-gray-400 hover:text-white">Rencontrez nos mécaniciens</a></li>
           </ul>
         </div>
 
         <!-- {/* Services */} -->
         <div>
-          <h3 class="text-lg font-semibold mb-4">Our Services</h3>
+          <h3 class="text-lg font-semibold mb-4">Contact</h3>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-white">Cardiology</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Neurology</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Laboratory</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Emergency Care</a></li>
+
+              <li class="text-gray-400 hover:text-white">{{ 'E-mail: test@gmail.com' }}</li>
+              <li class="text-gray-400 hover:text-white">Numéro de téléphone: 033 33 333 33</li>
+              <li class="text-gray-400 hover:text-white">Adresse: IID111 AnkadifostyTest</li>
+            
           </ul>
         </div>
 
         <!-- {/* Contact Info */} -->
         <div>
-          <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+          <h3 class="text-lg font-semibold mb-4">Developpeurs</h3>
           <ul class="space-y-2">
             <li class="flex items-center text-gray-400">
-              <!-- <Phone class="h-5 w-5 mr-2" /> -->
-              +1 (555) 123-4567
+              Ramandimbiniaina Lahatra Zo
             </li>
             <li class="flex items-center text-gray-400">
-              <!-- <Clock class="h-5 w-5 mr-2" /> -->
               24/7 Available
             </li>
           </ul>
@@ -66,7 +64,7 @@
 
       <!-- {/* Copyright */} -->
       <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-        <p>&copy; 2025 MediCare. All rights reserved.</p>
+        <p>&copy; {{ currentDate | date: 'yyyy' }} GaragePro Tous droits réservés.</p>
       </div>
     </div>
   </footer>

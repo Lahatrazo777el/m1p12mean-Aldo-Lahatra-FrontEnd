@@ -1,3 +1,4 @@
+import { ShowPrestationComponent } from './pages/show-prestation/show-prestation.component';
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -15,6 +16,7 @@ import { AjoutRdvComponent } from './pages/ajout-rdv/ajout-rdv.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
 import { authGuard } from './guards/auth.guard';
 import { AboutComponent } from './pages/about/about.component';
+import { MecanicienComponent } from './pages/mecanicien/mecanicien.component';
 
 export const routes: Routes = [
     {
@@ -25,9 +27,11 @@ export const routes: Routes = [
           { path: 'inscription', component: InscriptionComponent },
           { path: 'home', component: HomeComponent },
           { path: 'about', component: AboutComponent },
+          { path: 'mecaniciens', component: MecanicienComponent },
           { path: 'prestations', component: PrestationComponent },
+          { path: 'prestations/:id', component: ShowPrestationComponent },
           { path: 'prestations/create', component: CreatePrestationComponent, canActivate: [authGuard]},
-          { path: 'prestations/:id', component: EditPrestationComponent, canActivate: [authGuard]},
+          { path: 'prestations/:id/edit', component: EditPrestationComponent, canActivate: [authGuard]},
           { path: 'repair-histories/create', component: CreateRepairHistoryComponent, canActivate: [authGuard]},
           { path: 'repair-histories', component: RepairHistoryComponent, canActivate: [authGuard]},
           { path: 'user', component: UserComponent },
