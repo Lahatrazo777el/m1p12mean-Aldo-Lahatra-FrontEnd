@@ -27,6 +27,7 @@ export class AuthService {
   saveToken(token: string): void {
     localStorage.setItem('token', token);
     this.isAuthenticatedSubject.next(true);
+    this.roleSubject.next(this.getRole());
   }
 
   getToken(): string | null {
