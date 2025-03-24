@@ -19,6 +19,10 @@ export class UserService {
   getUserByRole(roleName: String): Observable<any>{
     return this.http.get(`${this.apiUrl}/role/${roleName}`);
   }
+  getMecaniciensByDate(date: string): Observable<any> {
+    const url = date ? `${this.apiUrl}/mecanicien-dispo?date=${date}` : `${this.apiUrl}/mecanicien-dispo`;
+    return this.http.get(url);
+  }
   addUser(data : any): Observable<any>{
     return this.http.post(this.apiUrl,data);
   } 

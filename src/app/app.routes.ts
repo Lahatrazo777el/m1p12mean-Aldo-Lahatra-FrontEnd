@@ -10,6 +10,7 @@ import { PrestationComponent } from './pages/prestation/prestation.component';
 import { AjoutRdvComponent } from './pages/ajout-rdv/ajout-rdv.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
 import { DetailRdvComponent } from './pages/detail-rdv/detail-rdv.component';
+import { MecanicienDispoComponent } from './pages/mecanicien-dispo/mecanicien-dispo.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,7 @@ export const routes: Routes = [
           { path: 'vehicule', component: VehiculeComponent},
           { path: 'ajout-rendezvous', component: AjoutRdvComponent},
           { path: 'rendezvous', component: DetailRdvComponent},
+          { path: 'mecanicien-disponible', component: MecanicienDispoComponent },
           { path: '', redirectTo: '/home', pathMatch: 'full'},
         ]
     },
