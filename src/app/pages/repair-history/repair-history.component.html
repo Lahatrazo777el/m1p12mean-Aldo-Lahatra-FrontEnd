@@ -1,0 +1,23 @@
+
+   
+      <div class="p-6 bg-gray-50 min-h-screen">
+        <div class="bg-white rounded-lg shadow">
+          <div class="grid grid-cols-2 items-center p-6 border-b">
+            <h1 class="text-2xl font-semibold text-gray-900">Suivi facture</h1>
+            <div class="flex ">
+                <div class="grow">
+
+                    <input type="text" [(ngModel)]="searchTerm" (input)="filterData()" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-0 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rechercher..." />
+                </div>
+                <a routerLink="/repair-histories/create" *ngIf="authService.isManager">
+
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                      Ajouter une facture
+                    </button>
+                </a>
+            </div>
+          </div>
+    
+          <app-repair-history-list [repairHistories]="repairHistories"/>   
+        </div>
+      </div>

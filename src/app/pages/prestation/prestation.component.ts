@@ -1,25 +1,39 @@
+import { AuthService } from '@/services/auth.service';
 
 import { PrestationService } from '@/services/prestation.service';
 import { Component, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
+import { PrestationListComponent } from '@/components/prestation/prestation-list/prestation-list.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-prestation',
-  imports: [CommonModule],
+  imports: [CommonModule, PrestationListComponent, FormsModule, RouterModule],
   templateUrl: './prestation.component.html',
   styleUrl: './prestation.component.css'
 })
 export class PrestationComponent implements OnInit {
   prestations: any[] = [];
-  constructor(private prestationService: PrestationService){}
+  searchTerm: string = ''; 
+
+  constructor(private prestationService: PrestationService, public authService: AuthService){}
 
   ngOnInit(): void {
     this.loadPrestations();
   }
 
-  loadPrestations(): void{
-    this.prestationService.getPrestations().subscribe(data => this.prestations = data);
+  loadPrestations(params?: any): void{
+    this.prestationService.getPrestations(params).subscribe(data => this.prestations = data);
   }
 
+  filterData(): void{
+    this.loadPrestations({search: this.searchTerm});
+  }
+
+  deleteService(serviceId: string): void{
+    this.prestationService.deletePrestation(serviceId).subscribe(() => this.loadPrestations());
+  }
+    
 }

@@ -5,15 +5,25 @@
         <h2 class="text-3xl font-bold text-gray-900">Nos Services</h2>
         <p class="mt-4 text-lg text-gray-600">Votre voiture mérite le meilleur !</p>
       </div>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-        @for(prestation of prestations; track prestation._id){
-            <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ prestation.name }}</h3>
-              <p class="text-gray-600">Prix: {{ prestation.price.$numberDecimal }} Ariary</p>
-              <p class="text-gray-600">Durée: {{ prestation.duration }} minutes</p>
-            </div>
-        }
-        
+      <div class="flex justify-between mb-3">
+        <div class="grow">
+
+          <input type="text" [(ngModel)]="searchTerm" (input)="filterData()" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-0 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rechercher..." />
+        </div>
+        <a routerLink="/prestations/create" *ngIf="authService.isManager">
+
+          <button class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            Ajouter un service
+          </button>
+        </a>
       </div>
+      
+      @if(prestations.length > 0 ){
+
+        <app-prestation-list [prestations]="prestations" (delete)="deleteService($event)"/>  
+      } @else {
+        <p>Aucune donnée disponible</p>
+      }
+
     </div>
   </div>
