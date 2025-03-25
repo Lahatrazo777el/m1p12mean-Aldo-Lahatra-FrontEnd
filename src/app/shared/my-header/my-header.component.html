@@ -2,7 +2,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center">
-          <!-- <lucide-stethoscope  class="h-8 w-8 text-blue-600" /> -->
           <span class="ml-2 text-xl font-bold text-gray-900">GaragePro</span>
         </div>
         
@@ -10,9 +9,12 @@
         <div class="hidden md:flex items-center space-x-8">
           <a routerLink="/home" class="text-gray-700 hover:text-blue-600">Acceuil</a>
           <a routerLink="/prestations" class="text-gray-700 hover:text-blue-600">Nos services</a>
+          
           <a routerLink="/about" class="text-gray-700 hover:text-blue-600">Qui sommes-nous</a>
+          <a routerLink="/mecaniciens" class="text-gray-700 hover:text-blue-600">Notre équipe</a>
           <a routerLink="/repair-histories" *ngIf="isLoggedIn && authService.isClient" class="text-gray-700 hover:text-blue-600">Vos Factures</a>
-          <a routerLink="/repair-histories" *ngIf="isLoggedIn && authService.isMecanicien" class="text-gray-700 hover:text-blue-600">Mes opérations</a>
+          <a routerLink="/repair-histories" *ngIf="isLoggedIn && authService.isManager" class="text-gray-700 hover:text-blue-600">Vos Factures</a>
+          <a routerLink="/repair-histories/mecano" *ngIf="isLoggedIn && authService.isMecanicien" class="text-gray-700 hover:text-blue-600">Mes opérations</a>
           <a routerLink="/login" *ngIf="!isLoggedIn">
 
             <button class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
@@ -34,12 +36,10 @@
           >
           @if(!isMenuOpen){
 
-              <!-- <lucide-menu class="h-6 w-6" /> -->
           }
 
           @if(isMenuOpen){
 
-              <!-- <lucide-x class="h-6 w-6" /> -->
           }
           </button>
         </div>

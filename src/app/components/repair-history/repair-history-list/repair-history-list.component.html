@@ -65,20 +65,32 @@
                 </div>
               </td>
               <td  class="p-4">
-                <div *ngIf="authService.isClient" class="flex -space-x-2">
+                @if(authService.isClient && !item.avis){
+
+                  <div class="flex -space-x-2">
+                      <div class="font-medium text-gray-900">
+                        <button (click)="showModal(item.mecanicien._id, item._id)" class="w-full mt-2 hover:cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                          Notez le service
+                        </button>
+                      </div>
+                  </div>
+                } @else if(item.avis) {
+
+                  <div class="flex -space-x-2">
                     <div class="font-medium text-gray-900">
-                      <button (click)="showModal(item.mecanicien._id)" class="w-full mt-2 hover:cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                        Notez le service
-                      </button>
-                    </div>
-                </div>
+                      {{ item.avis.note }} étoile
+                    </div></div>
+                }
               </td>
               <td  class="p-4">
                 <div  class="flex -space-x-2">
                     <div class="font-medium text-gray-900">
-                      <button class="w-full mt-2 hover:cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                        Voir détail
-                      </button>
+                      <a [routerLink]="['/repair-histories/',item._id]">
+
+                        <button class="w-full mt-2 hover:cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                          Voir détail
+                        </button>
+                      </a>
                     </div>
                 </div>
               </td>

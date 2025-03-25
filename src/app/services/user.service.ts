@@ -13,6 +13,9 @@ export class UserService {
   getAllUser(): Observable<any>{
     return this.http.get(this.apiUrl);
   }
+  getTeam(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/team`);
+  }
   getLoyalUser(): Observable<any>{
     return this.http.get(`${this.apiUrl}/loyal`);
   }

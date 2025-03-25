@@ -1,0 +1,60 @@
+  <div class="min-h-screen bg-gray-100">
+        
+    
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 py-8" >
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Blog Post Content -->
+            <div class="lg:col-span-2">
+              <h1 class="text-4xl font-bold mb-2">Facture {{ repairHistory?.numFacture }}</h1>
+              <p class="text-gray-600 mb-4">Date {{ repairHistory?.createdAt | date: 'dd/mm/YYYY hh:mm' }}</p>
+              <!-- Side Widget -->
+              <div class="bg-white p-6 rounded-lg shadow">
+                <p class="text-gray-600 mb-4">Véhicule : 
+                  
+                  <span class="bg-gray-600 text-white px-3 py-1 rounded text-sm">{{ repairHistory?.vehicule?.name }}</span>    
+              </p>
+                <p class="text-gray-600 mb-4">Numéro de série : {{ repairHistory?.vehicule?.number }}</p>
+                
+                <div class="prose max-w-none ">
+
+                    <p class="text-gray-600 mb-4">Client: {{ repairHistory?.client?.name }} </p>
+                  </div>
+                <div class="prose max-w-none ">
+
+                    <p class="text-gray-600 mb-4">Mecanicien: {{ repairHistory?.mecanicien?.name }} </p>
+                  </div>
+                <div class="prose max-w-none">
+                    <h2 class="text-xl font-bold mb-4">Prestation:</h2>
+                
+                  <p>Désignation: {{ repairHistory?.prestation?.name }}</p>
+                  <p>Prix: {{ repairHistory?.prestation?.price?.$numberDecimal }} Ariary</p>
+                </div>
+  
+
+                <div class="prose max-w-none">
+                  <h2 class="text-xl font-bold mb-4">Avis:</h2>
+                
+                  <p>Note  {{ repairHistory?.avis?.note }} étoile</p>
+                  <p>Commentaire : {{ repairHistory?.avis?.commentaire }}</p>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+              
+    
+              <!-- Categories Widget -->
+              <div class="bg-white p-6 rounded-lg shadow mb-6">
+                <h2 class="text-xl font-bold mb-4">Découvrir</h2>
+                <div class="grid grid-cols-2 gap-2">
+                  
+                </div>
+              </div>
+    
+              
+            </div>
+          </div>
+        </div>
+      </div>
