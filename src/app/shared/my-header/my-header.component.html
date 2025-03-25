@@ -8,10 +8,19 @@
         
         <!-- {/* Desktop Navigation */} --> 
         <div class="hidden md:flex items-center space-x-8">
-          <a routerLink="/home" class="text-gray-700 hover:text-blue-600">Acceuil</a>
+          <a routerLink="/home" *ngIf="!isLoggedIn" class="text-gray-700 hover:text-blue-600">Acceuil</a>
+
           <a routerLink="/prestations" class="text-gray-700 hover:text-blue-600">Nos services</a>
-          <a routerLink="/about" class="text-gray-700 hover:text-blue-600">Qui sommes-nous</a>
+          <a routerLink="/about" *ngIf="!isLoggedIn" class="text-gray-700 hover:text-blue-600">Qui sommes-nous</a>
+
+          <a routerLink="/user" *ngIf="isLoggedIn && authService.isManager" class="text-gray-700 hover:text-blue-600">Utilisateur</a>
+          <a routerLink="/rendezvous" *ngIf="isLoggedIn && authService.isManager" class="text-gray-700 hover:text-blue-600">Rendez-vous</a>
+          <a routerLink="/vehicule" *ngIf="isLoggedIn && authService.isManager" class="text-gray-700 hover:text-blue-600">Transport</a>
+          <a routerLink="/mecanicien-disponible" *ngIf="isLoggedIn && authService.isManager" class="text-gray-700 hover:text-blue-600">Disponibilité</a>
+
+          <a routerLink="/ajout-rendezvous" *ngIf="isLoggedIn && authService.isClient" class="text-gray-700 hover:text-blue-600">Rendez-vous</a>
           <a routerLink="/repair-histories" *ngIf="isLoggedIn && authService.isClient" class="text-gray-700 hover:text-blue-600">Vos Factures</a>
+
           <a routerLink="/repair-histories" *ngIf="isLoggedIn && authService.isMecanicien" class="text-gray-700 hover:text-blue-600">Mes opérations</a>
           <a routerLink="/login" *ngIf="!isLoggedIn">
 

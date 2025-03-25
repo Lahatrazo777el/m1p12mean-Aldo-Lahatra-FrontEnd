@@ -14,6 +14,11 @@ import { CreateRepairHistoryComponent } from './pages/create-repair-history/crea
 import { RepairHistoryComponent } from './pages/repair-history/repair-history.component';
 import { AjoutRdvComponent } from './pages/ajout-rdv/ajout-rdv.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
+import { AboutComponent } from './pages/about/about.component';
+import { MecanicienComponent } from './pages/mecanicien/mecanicien.component';
+import { authGuard } from './guards/auth.guard';
+import { DetailRdvComponent } from './pages/detail-rdv/detail-rdv.component';
+import { MecanicienDispoComponent } from './pages/mecanicien-dispo/mecanicien-dispo.component';
 
 export const routes: Routes = [
     {
