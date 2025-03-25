@@ -10,6 +10,8 @@
         <div class="hidden md:flex items-center space-x-8">
           <a routerLink="/home" *ngIf="!isLoggedIn" class="text-gray-700 hover:text-blue-600">Acceuil</a>
 
+          <a routerLink="/dashboard" *ngIf="isLoggedIn && authService.isManager" class="text-gray-700 hover:text-blue-600">Dashboard</a>
+
           <a routerLink="/prestations" class="text-gray-700 hover:text-blue-600">Nos services</a>
           <a routerLink="/about" *ngIf="!isLoggedIn" class="text-gray-700 hover:text-blue-600">Qui sommes-nous</a>
 

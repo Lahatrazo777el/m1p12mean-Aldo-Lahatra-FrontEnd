@@ -1,6 +1,6 @@
 import { DashboardService } from '@/services/dashboard.service';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -9,7 +9,8 @@ import Chart from 'chart.js/auto';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+
+export class DashboardComponent implements OnInit {
   countData: any = {};
   mecanicienDispo: any = {};
 
@@ -24,6 +25,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
+    this.fetchData();
+  }
+
+  fetchData(): void {
     this.dashboardService.getCountUser().subscribe(data => {
       this.countData = data;
     });
@@ -34,30 +39,22 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.dashboardService.getCountClientPerMonth().subscribe(data => {
       this.countClientPerMonth = data;
-      this.createChart();
+      this.createClientChart();
     });
 
     this.getCountRendezVousPerMonth();
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (this.countClientPerMonth.length > 0) {
-        this.createChart();
-      }
-    }, 500);
-  }
-
-  createChart(): void {
+  createClientChart(): void {
     const ctx = document.getElementById('clientChart') as HTMLCanvasElement;
-  
+
     if (this.chart) {
       this.chart.destroy();
     }
-  
+
     const labels = this.countClientPerMonth.map(item => `${this.monthNames[item._id.month - 1]} ${item._id.year}`);
     const dataValues = this.countClientPerMonth.map(item => item.totalClients);
-  
+
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -100,9 +97,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         }
       }
     });
-  }  
+  }
 
-  getCountRendezVousPerMonth() {
+  getCountRendezVousPerMonth(): void {
     this.dashboardService.getCountRendezVousPerMonth().subscribe((data: any) => {
       const labels = data.map((item: any) => `${this.monthNames[item._id.month - 1]} ${item._id.year}`);
       const rdvFalseData = data.map((item: any) => item.totalRdvFalse);
@@ -112,7 +109,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  createRdvChart(labels: string[], rdvFalseData: number[], rdvTrueData: number[]) {
+  createRdvChart(labels: string[], rdvFalseData: number[], rdvTrueData: number[]): void {
     const ctx = document.getElementById('rdvChart') as HTMLCanvasElement;
 
     if (this.rdvChart) {
