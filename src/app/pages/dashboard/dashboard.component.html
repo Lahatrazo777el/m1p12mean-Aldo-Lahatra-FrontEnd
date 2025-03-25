@@ -1,1 +1,46 @@
-<p>dashboard works!</p>
+<div class="flex flex-col min-h-screen bg-gray-100 p-6">
+    <h1 class="text-xl text-center mb-6">Statistiques des utilisateurs actuel</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold text-gray-700">Clients total</h2>
+        <p class="text-4xl font-bold text-gray-500">{{ countData.clients || 0 }}</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold text-gray-700">Mécaniciens</h2>
+        <p class="text-4xl font-bold text-gray-500">{{ countData.mecaniciens || 0 }} </p>
+
+        <p class="text-xl font-bold text-gray-300" *ngIf="mecanicienDispo.message">
+          ({{ mecanicienDispo.message }})
+        </p>
+
+        <p class="text-lg font-semibold text-gray-600 mt-2" *ngIf="mecanicienDispo.mecaniciens">
+          Disponible : 
+          <span *ngFor="let mecano of mecanicienDispo.mecaniciens; let last = last">
+            {{ mecano.name }}{{ last ? '' : ', ' }}
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div class="my-4"></div>
+    
+    <h1 class="text-xl text-center mb-6">Graphiques</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold text-gray-700 text-center mb-6">Clients par Mois</h2>
+            <div class="relative w-full h-80">
+                <canvas id="clientChart"></canvas>
+            </div>
+        </div>
+
+        <div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold text-gray-700 text-center mb-6">Rendez-vous par Mois</h2>
+            <div class="relative w-full h-80">
+                <canvas id="rdvChart"></canvas>
+            </div>
+        </div>
+    </div>   
+</div>

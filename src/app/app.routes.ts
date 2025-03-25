@@ -19,6 +19,7 @@ import { MecanicienComponent } from './pages/mecanicien/mecanicien.component';
 import { authGuard } from './guards/auth.guard';
 import { DetailRdvComponent } from './pages/detail-rdv/detail-rdv.component';
 import { MecanicienDispoComponent } from './pages/mecanicien-dispo/mecanicien-dispo.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {
@@ -42,6 +43,7 @@ export const routes: Routes = [
           { path: 'ajout-rendezvous', component: AjoutRdvComponent},
           { path: 'rendezvous', component: DetailRdvComponent},
           { path: 'mecanicien-disponible', component: MecanicienDispoComponent },
+          { path: 'dashboard', component: DashboardComponent },
           { path: '', redirectTo: '/home', pathMatch: 'full'},
         ]
     },
