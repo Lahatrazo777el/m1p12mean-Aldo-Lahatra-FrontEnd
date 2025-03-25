@@ -19,6 +19,6 @@ export class HomeComponent implements OnInit {
   }  
 
   loadPrestation(): void{
-    this.prestationService.getPrestations().subscribe((data) => this.prestations = data);
+    this.prestationService.getPrestations({limit: 4}).subscribe((data) => this.prestations = data.data);
   }
 }

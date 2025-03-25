@@ -18,12 +18,18 @@
         </a>
       </div>
       
-      @if(prestations.length > 0 ){
-
-        <app-prestation-list [prestations]="prestations" (delete)="deleteService($event)"/>  
+      @if(isLoading){
+        <p>Chargement...</p>
       } @else {
-        <p>Aucune donnée disponible</p>
+
+        @if(prestations.length > 0 ){
+  
+          <app-prestation-list [prestations]="prestations" (delete)="deleteService($event)" [page]="page" [count]="total" (changePage)="changePage($event)"  />  
+        } @else {
+          <p>Aucune donnée disponible</p>
+        }
       }
+
 
     </div>
   </div>

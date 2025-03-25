@@ -17,6 +17,11 @@ import { RouterModule } from '@angular/router';
 export class PrestationComponent implements OnInit {
   prestations: any[] = [];
   searchTerm: string = ''; 
+  page: number = 1;
+  limit = 10;
+  total = 10;
+  isLoading = true;
+
 
   constructor(private prestationService: PrestationService, public authService: AuthService){}
 
@@ -24,8 +29,30 @@ export class PrestationComponent implements OnInit {
     this.loadPrestations();
   }
 
+  changePage(event: any){
+    this.page = event;
+    this.loadPrestations({
+      page: this.page,
+      search: this.searchTerm,
+    })
+  }
+
   loadPrestations(params?: any): void{
-    this.prestationService.getPrestations(params).subscribe(data => this.prestations = data);
+    this.isLoading = true;
+    this.prestationService.getPrestations(params).subscribe({
+      next: (response) => {
+        const data = response;
+        this.isLoading = false;
+        this.page = data.page;
+        this.prestations = data.data;
+        this.limit = data.limit;
+        this.total = data.total;
+      },
+      error: (err) => {
+        console.log(err);
+        this.isLoading = false;
+      },
+    });
   }
 
   filterData(): void{

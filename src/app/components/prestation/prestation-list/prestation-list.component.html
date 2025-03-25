@@ -1,6 +1,5 @@
 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-    @for(prestation of prestations; track prestation._id){
-        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <div *ngFor="let prestation of prestations | paginate: { itemsPerPage: 10, currentPage: page, totalItems: count }" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
           <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ prestation.name }}</h3>
           <p class="text-gray-600">Prix: {{ prestation.price.$numberDecimal }} Ariary</p>
           <p class="text-gray-600">Durée: {{ prestation.duration }} minutes</p>
@@ -14,7 +13,6 @@
 
           </div>
         </div>
-    }
     @if(isModalVisible){
 
       <app-simple-modal (close)="hideModal()" (action)="deleteService()">
@@ -23,3 +21,4 @@
       </app-simple-modal>
     }
   </div>
+  <pagination-controls (pageChange)="changeMyPage($event)"></pagination-controls>
