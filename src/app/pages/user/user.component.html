@@ -87,7 +87,7 @@
         </table>
       </div>
 
-      <div class="flex justify-between items-center mt-6 bg-gray-100 p-4 rounded-lg shadow-md">
+      <div *ngIf="utilisateurs.length > 5"  class="flex justify-between items-center mt-6 bg-gray-100 p-4 rounded-lg shadow-md">
         <button (click)="changePage('previous')" 
                 [disabled]="currentPage === 1" 
                 class="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-300">
