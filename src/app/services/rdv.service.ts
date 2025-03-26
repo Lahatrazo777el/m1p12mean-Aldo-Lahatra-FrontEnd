@@ -24,4 +24,7 @@ export class RdvService {
   getRdvByUser(id: string): Observable<any>{
     return this.http.get(`${this.apiUrl}/${id}`);
   }
+  deleteRdvByUser(id: string): Observable<any>{
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

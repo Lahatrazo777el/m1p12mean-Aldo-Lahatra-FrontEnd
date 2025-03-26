@@ -27,10 +27,11 @@
             <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                 <thead class="bg-gray-800 text-white">
                     <tr>
-                        <th class="py-3 px-6 text-left">Date de reservation</th>
+                        <th class="py-3 px-6 text-left">Date de prise</th>
                         <th class="py-3 px-6 text-left">Prestation</th>
-                        <th class="py-3 px-6 text-left">Date</th>
+                        <th class="py-3 px-6 text-left">Date de reservation</th>
                         <th class="py-3 px-6 text-left">Heure</th>
+                        <th class="py-3 px-6 text-left">statut</th>
                         <th class="py-3 px-6 text-left"></th>
                     </tr>
                 </thead>
@@ -40,8 +41,12 @@
                         <td class="py-2 px-6 font-semibold">{{ rendezvous.prestation?.name }}</td>
                         <td class="py-2 px-6 font-semibold">{{ formatDate(rendezvous.date_rdv) }}</td>
                         <td class="py-2 px-6 font-semibold">{{ formatTime(rendezvous.date_rdv) }}</td>
-                        <td class="py-2 px-6 font-semibold">
-                            <button type="button" class="bg-red-500 text-white px-2 py-2 rounded">Annuler</button>
+                        <td class="py-2 px-6 font-semibold" [innerHTML]="formatStatut(rendezvous.type, rendezvous.date_annulation)"></td>
+                        <td class="py-2 px-6">
+                            <button *ngIf="isEnCours(rendezvous.type, rendezvous.date_annulation)" 
+                                    class="bg-red-500 text-white px-4 py-2 rounded" (click)="annulerRdv(rendezvous._id)">
+                                Annuler
+                            </button>
                         </td>
                     </tr>
                 </tbody>
