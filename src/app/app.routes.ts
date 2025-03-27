@@ -19,6 +19,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { MecanicienComponent } from './pages/mecanicien/mecanicien.component';
 import { ShowRepairHistoryComponent } from './pages/show-repair-history/show-repair-history.component';
 import { RepairHistoryMecanoComponent } from './pages/repair-history-mecano/repair-history-mecano.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,7 @@ export const routes: Routes = [
           { path: 'inscription', component: InscriptionComponent },
           { path: 'home', component: HomeComponent },
           { path: 'about', component: AboutComponent },
+          { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
           { path: 'mecaniciens', component: MecanicienComponent },
           { path: 'prestations', component: PrestationComponent },
           { path: 'prestations/create', component: CreatePrestationComponent, canActivate: [authGuard]},
