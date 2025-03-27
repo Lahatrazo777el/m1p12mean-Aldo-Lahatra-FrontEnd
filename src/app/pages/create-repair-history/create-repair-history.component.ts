@@ -31,7 +31,7 @@ export class CreateRepairHistoryComponent implements OnInit {
   }
 
   loadPrestations(params?: any): void{
-    this.prestationService.getPrestations(params).subscribe(data => this.prestations = data);
+    this.prestationService.getPrestations(params).subscribe(data => this.prestations = data.data);
   }
 
   loadClient(): void{
