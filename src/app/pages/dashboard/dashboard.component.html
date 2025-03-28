@@ -1,6 +1,64 @@
 <p>dashboard works!</p>
-<p>Total income by day/week/month</p>
+<p>Total income by day/week/month {{ totalIncome }} </p>
 <p>Service revenue</p>
 Month chart revenue
 
 Mecano perf
+      <div class="min-h-screen bg-gray-50 p-6">
+        <header class="mb-8">
+          
+          <div class="flex items-center gap-4 mb-6">
+            <div class="flex items-center gap-2 bg-white rounded-md shadow-sm px-4 py-2">
+              <button class="text-gray-500">&lt;</button>
+              <span class="text-sm text-gray-700">03/02/2019 - 20/08/2019</span>
+              <button class="text-gray-500">&gt;</button>
+            </div>
+            <button class="px-4 py-2 text-sm bg-white text-gray-700 rounded-md shadow-sm">All Day</button>
+            <button class="px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-md">Advanced Options</button>
+            <button class="px-4 py-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600">New</button>
+          </div>
+        </header>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <app-stat-card [title]="'Revenu total'" [value]="totalIncome" />
+        </div>
+    
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h2 class="text-lg font-semibold text-gray-900">Services Statistiques</h2>
+              </div>
+              <div class="flex gap-2">
+                <button class="px-3 py-1 text-sm bg-blue-50 text-blue-600 rounded-md">1D</button>
+                <button class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md">5D</button>
+                <button class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md">1M</button>
+                <button class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md">1Y</button>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              @for (item of incomeService; track $index) {
+
+                <div>
+                    <h3 class="text-sm text-gray-500">{{ item._id }}</h3>
+                    <p class="text-2xl font-semibold text-gray-900">{{ item.totalIncome.$numberDecimal }} Ar</p>
+                 </div>
+              }
+            </div>
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900">Statistiques revenu</h2>
+              </div>
+            <app-bar-chart [totalIncomeYear]="totalIncomeYear" />  
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h2 class="text-lg font-semibold text-gray-900 mb-2">Performance des mecaniciens</h2>
+            @for (item of mecanicienPerf; track 'mecan'+$index) {
+
+                <div class="flex justify-between">
+                    <p>{{ item.userName }}</p>
+                    <p>{{ item.totalNote }} / {{ item.adjustedCount }} étoile</p>
+                </div>
+            }
+          </div>
+        </div>
+      </div>

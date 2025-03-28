@@ -20,6 +20,8 @@ export class RepairHistoryListComponent {
   repairHistoryId: string | null = null;
   avis = {note: '', commentaire: '', clientId: '', mecanicienId: '', repairHistoryId: ''};
 
+  errorMsg = '';
+
   constructor(public authService: AuthService, private avisService: AvisService) {}
 
   showModal(mecanicienId: string, repairHistoryId: string) {
@@ -37,9 +39,17 @@ export class RepairHistoryListComponent {
     if(this.repairHistoryId) this.avis.repairHistoryId = this.repairHistoryId;
     this.avis.clientId = this.authService.getUser().userId;
 
-    this.avisService.addAvis(this.avis).subscribe(() =>  {
-      this.hideModal()
-      this.reload.emit();
+    this.avisService.addAvis(this.avis).subscribe({
+      next: () => {
+        this.hideModal();
+        this.reload.emit();
+      },
+      error: (error) => {
+        console.error('Erreur lors de l\'ajout de l\'avis:', error);
+        if(error.status == 400){
+          this.errorMsg = error.error.message;
+        }
+      }
     });   
   }
 }

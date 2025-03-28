@@ -28,6 +28,12 @@ export class RepairHistoryComponent implements OnInit{
   }
 
   loadRepairHistory(params?: any): void{
-    this.repairHistoryService.getRepairHistories(params).subscribe(data => this.repairHistories = data);
+    const userId = this.authService.getUser().userId;
+    if(this.authService.isClient){
+      this.repairHistoryService.getRepairHistoriesClient(userId,params).subscribe(data => this.repairHistories = data);
+    } else {
+
+      this.repairHistoryService.getRepairHistories(params).subscribe(data => this.repairHistories = data);
+    }
   }
 }
