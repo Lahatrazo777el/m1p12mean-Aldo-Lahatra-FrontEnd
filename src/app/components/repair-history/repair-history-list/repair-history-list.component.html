@@ -95,7 +95,8 @@
               </td>
               
             </tr>
-
+            <pagination-controls (pageChange)="changeMyPage($event)"></pagination-controls>
+            
         </ng-container>
         <ng-template #noData>No data</ng-template>
       </tbody>
@@ -145,6 +146,5 @@
         </div>
       </app-form-modal>
     }
-    <pagination-controls (pageChange)="changeMyPage($event)"></pagination-controls>
 
   </div>
