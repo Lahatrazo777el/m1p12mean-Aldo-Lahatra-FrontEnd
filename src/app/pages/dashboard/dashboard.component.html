@@ -1,21 +1,19 @@
-<p>dashboard works!</p>
-<p>Total income by day/week/month {{ totalIncome }} </p>
-<p>Service revenue</p>
-Month chart revenue
 
-Mecano perf
       <div class="min-h-screen bg-gray-50 p-6">
         <header class="mb-8">
           
           <div class="flex items-center gap-4 mb-6">
             <div class="flex items-center gap-2 bg-white rounded-md shadow-sm px-4 py-2">
-              <button class="text-gray-500">&lt;</button>
-              <span class="text-sm text-gray-700">03/02/2019 - 20/08/2019</span>
-              <button class="text-gray-500">&gt;</button>
+              <select name="totalIncomePeriod" [(ngModel)]="totalIncomePeriod"
+              class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                  <option value="">Tous</option>
+                  
+                  <option value="today">Aujourd'hui </option>
+                  <option value="week">Cette semaine</option>
+                  <option value="month">Ce mois-ci </option>
+              </select>
             </div>
-            <button class="px-4 py-2 text-sm bg-white text-gray-700 rounded-md shadow-sm">All Day</button>
-            <button class="px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-md">Advanced Options</button>
-            <button class="px-4 py-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600">New</button>
+            <button class="px-4 py-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600" (click)="filterIncome()" >Filtrer</button>
           </div>
         </header>
     
@@ -30,10 +28,10 @@ Mecano perf
                 <h2 class="text-lg font-semibold text-gray-900">Services Statistiques</h2>
               </div>
               <div class="flex gap-2">
-                <button class="px-3 py-1 text-sm bg-blue-50 text-blue-600 rounded-md">1D</button>
-                <button class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md">5D</button>
-                <button class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md">1M</button>
-                <button class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md">1Y</button>
+                <button [ngClass]="{'text-blue-600 bg-blue-50' : period == 'today' ,  'text-gray-600 hover:bg-gray-50' :  period != 'today'}" class="px-3 py-1 text-sm   rounded-md" (click)="getServiceStat('today')" >Aujourd'hui</button>
+                <button [ngClass]="{'text-blue-600 bg-blue-50' : period == 'week' ,  'text-gray-600 hover:bg-gray-50' :  period != 'week'}" class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md" (click)="getServiceStat('week')">Cette-semaine</button>
+                <button [ngClass]="{'text-blue-600 bg-blue-50' : period == 'month' ,  'text-gray-600 hover:bg-gray-50' :  period != 'month'}" class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md" (click)="getServiceStat('month')">Ce mois ci</button>
+                <button [ngClass]="{'text-blue-600 bg-blue-50' : period == '' ,  'text-gray-600 hover:bg-gray-50' :  period != ''}" class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md" (click)="getServiceStat('')">Tous</button>
               </div>
             </div>
             <div class="grid grid-cols-2 gap-4 mb-6">

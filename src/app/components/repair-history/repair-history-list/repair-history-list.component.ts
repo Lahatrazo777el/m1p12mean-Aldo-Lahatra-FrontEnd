@@ -5,22 +5,27 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormModalComponent } from '@/shared/form-modal/form-modal.component';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-repair-history-list',
-  imports: [DatePipe, CommonModule, FormModalComponent, FormsModule, RouterLink],
+  imports: [DatePipe, CommonModule, FormModalComponent, FormsModule, RouterLink, NgxPaginationModule],
   templateUrl: './repair-history-list.component.html',
   styleUrl: './repair-history-list.component.css'
 })
 export class RepairHistoryListComponent {
   @Input() repairHistories: any[] = [];
   @Output() reload = new EventEmitter<any>();
+  @Input() page: any = 1; 
+  @Input() count: any = 1; 
   isModalVisible = false;
   mecanicienId: string | null = null;
   repairHistoryId: string | null = null;
   avis = {note: '', commentaire: '', clientId: '', mecanicienId: '', repairHistoryId: ''};
 
   errorMsg = '';
+
+  @Output() changePage = new EventEmitter <Number>();
 
   constructor(public authService: AuthService, private avisService: AvisService) {}
 
@@ -51,5 +56,10 @@ export class RepairHistoryListComponent {
         }
       }
     });   
+  }
+
+  changeMyPage(event: any): void{
+    console.log(event);
+    this.changePage.emit(event);
   }
 }

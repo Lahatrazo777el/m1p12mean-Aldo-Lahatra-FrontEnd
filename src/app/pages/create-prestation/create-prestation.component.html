@@ -3,6 +3,14 @@
       <h1 class="text-3xl font-bold text-center mb-6">Ajouter un service</h1>
       
       <form class="space-y-6" #myForm="ngForm" (ngSubmit)="onSubmit()">
+        @if(myForm.invalid){
+
+            <p class="text-gray-600 text-md">Veuillez remplir tous les champs</p>
+          }
+        @if(errorMsg){
+
+          <p class="text-red-600 text-md">{{ errorMsg }}</p>
+        }
         <div class="space-y-4">
           <label class="block">
             <span class="text-gray-700">Nom du service</span>
@@ -34,7 +42,6 @@
 
         <button
           type="submit"
-          [disabled]="myForm.invalid"
           class="w-full bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center gap-2"
         >
           Ajouter

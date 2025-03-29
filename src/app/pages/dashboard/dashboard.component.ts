@@ -4,19 +4,23 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BarChartComponent } from "../../shared/bar-chart/bar-chart.component";
 import { TotalIncomeByMonth } from '@/interfaces/total-income-by-month';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [StatCardComponent, CommonModule, BarChartComponent],
+  imports: [StatCardComponent, CommonModule, BarChartComponent, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit{
 
-  totalIncome = 0;
+  totalIncome: any = 0;
   incomeService : any[] = [];
   totalIncomeYear: any[] = [];
   mecanicienPerf: any[] = [];
+  totalIncomePeriod: string = '';
+
+  period : string = '';
 
   constructor(private dashboardService: DashboardService){}
 
@@ -27,12 +31,22 @@ export class DashboardComponent implements OnInit{
    this.loadMecanicienPerf();
   }
 
-  loadTotalIncome(): void{
-    this.dashboardService.loadTotalIncome().subscribe(data => this.totalIncome = data[0].totalIncome.$numberDecimal);
+  loadTotalIncome(params?: any): void{
+    this.dashboardService.loadTotalIncome(params).subscribe(data => this.totalIncome = data[0] ? data[0].totalIncome.$numberDecimal : 0);
   }
 
-  loadIncomeService():void{
-    this.dashboardService.loadIncomeService().subscribe(data => this.incomeService = data);
+  filterIncome(): void{
+    this.loadTotalIncome({period: this.totalIncomePeriod});
+  }
+
+  loadIncomeService(params?: any):void{
+    this.dashboardService.loadIncomeService(params).subscribe(data => this.incomeService = data);
+  }
+
+  getServiceStat(period: string):void{
+    let param = {period: period};
+    this.period = period;
+    this.loadIncomeService(param)
   }
 
   loadTotalIncomeYear():void{

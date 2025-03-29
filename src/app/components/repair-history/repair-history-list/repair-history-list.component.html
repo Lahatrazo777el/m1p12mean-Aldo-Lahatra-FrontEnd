@@ -15,8 +15,7 @@
       </thead>
       <tbody class="divide-y divide-gray-100">
         <ng-container *ngIf="repairHistories.length; else noData">
-          @for (item of repairHistories; track $index) {
-            <tr  class="hover:bg-gray-50">
+            <tr *ngFor="let item of repairHistories | paginate: { itemsPerPage: 10, currentPage: page, totalItems: count }"  class="hover:bg-gray-50">
                 <td class="p-4">
                     <div>
                       <div class="font-medium">{{ item.numFacture }}</div>
@@ -96,7 +95,7 @@
               </td>
               
             </tr>
-          }
+
         </ng-container>
         <ng-template #noData>No data</ng-template>
       </tbody>
@@ -146,4 +145,6 @@
         </div>
       </app-form-modal>
     }
+    <pagination-controls (pageChange)="changeMyPage($event)"></pagination-controls>
+
   </div>
