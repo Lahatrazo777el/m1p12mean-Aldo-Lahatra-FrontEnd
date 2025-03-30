@@ -13,6 +13,8 @@ export class EditPrestationComponent implements OnInit{
   prestation = {name: '', price: 0, duration: '00:00'};
   prestationId: null | string = null;
 
+  errorMsg: string = '';
+
   constructor(private route: ActivatedRoute, private prestationService: PrestationService, private router: Router){}
 
   ngOnInit(): void {
@@ -35,7 +37,17 @@ export class EditPrestationComponent implements OnInit{
 
   updatePrestation(): void{
     if(this.prestationId){
-      this.prestationService.updatePrestation(this.prestationId, this.prestation).subscribe(() => this.router.navigate(['/prestations']))
+      this.prestationService.updatePrestation(this.prestationId, this.prestation).subscribe({
+        next: () => {
+          this.router.navigate(['/prestations']);
+        },
+        error: (error) => {
+  
+          if(error.status == 400){
+            this.errorMsg = error.error.message;
+          }
+        }
+      })
     }
   }
 

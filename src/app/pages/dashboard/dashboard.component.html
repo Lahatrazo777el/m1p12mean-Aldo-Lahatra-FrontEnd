@@ -1,0 +1,62 @@
+
+      <div class="min-h-screen bg-gray-50 p-6">
+        <header class="mb-8">
+          
+          <div class="flex items-center gap-4 mb-6">
+            <div class="flex items-center gap-2 bg-white rounded-md shadow-sm px-4 py-2">
+              <select name="totalIncomePeriod" [(ngModel)]="totalIncomePeriod"
+              class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                  <option value="">Tous</option>
+                  
+                  <option value="today">Aujourd'hui </option>
+                  <option value="week">Cette semaine</option>
+                  <option value="month">Ce mois-ci </option>
+              </select>
+            </div>
+            <button class="px-4 py-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600" (click)="filterIncome()" >Filtrer</button>
+          </div>
+        </header>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <app-stat-card [title]="'Revenu total'" [value]="totalIncome" />
+        </div>
+    
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h2 class="text-lg font-semibold text-gray-900">Services Statistiques</h2>
+              </div>
+              <div class="flex gap-2">
+                <button [ngClass]="{'text-blue-600 bg-blue-50' : period == 'today' ,  'text-gray-600 hover:bg-gray-50' :  period != 'today'}" class="px-3 py-1 text-sm   rounded-md" (click)="getServiceStat('today')" >Aujourd'hui</button>
+                <button [ngClass]="{'text-blue-600 bg-blue-50' : period == 'week' ,  'text-gray-600 hover:bg-gray-50' :  period != 'week'}" class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md" (click)="getServiceStat('week')">Cette-semaine</button>
+                <button [ngClass]="{'text-blue-600 bg-blue-50' : period == 'month' ,  'text-gray-600 hover:bg-gray-50' :  period != 'month'}" class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md" (click)="getServiceStat('month')">Ce mois ci</button>
+                <button [ngClass]="{'text-blue-600 bg-blue-50' : period == '' ,  'text-gray-600 hover:bg-gray-50' :  period != ''}" class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-md" (click)="getServiceStat('')">Tous</button>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              @for (item of incomeService; track $index) {
+
+                <div>
+                    <h3 class="text-sm text-gray-500">{{ item._id }}</h3>
+                    <p class="text-2xl font-semibold text-gray-900">{{ item.totalIncome.$numberDecimal }} Ar</p>
+                 </div>
+              }
+            </div>
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900">Statistiques revenu</h2>
+              </div>
+            <app-bar-chart [totalIncomeYear]="totalIncomeYear" />  
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h2 class="text-lg font-semibold text-gray-900 mb-2">Performance des mecaniciens</h2>
+            @for (item of mecanicienPerf; track 'mecan'+$index) {
+
+                <div class="flex justify-between">
+                    <p>{{ item.userName }}</p>
+                    <p>{{ item.totalNote }} / {{ item.adjustedCount }} étoile</p>
+                </div>
+            }
+          </div>
+        </div>
+      </div>

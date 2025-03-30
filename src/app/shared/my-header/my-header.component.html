@@ -8,6 +8,7 @@
         <!-- {/* Desktop Navigation */} --> 
         <div class="hidden md:flex items-center space-x-8">
           <a routerLink="/home" class="text-gray-700 hover:text-blue-600">Acceuil</a>
+          <a routerLink="/dashboard" class="text-gray-700 hover:text-blue-600" *ngIf="authService.isManager">Tableau de bord</a>
           <a routerLink="/prestations" class="text-gray-700 hover:text-blue-600">Nos services</a>
           
           <a routerLink="/about" class="text-gray-700 hover:text-blue-600">Qui sommes-nous</a>

@@ -5,12 +5,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { PrestationListComponent } from '@/components/prestation/prestation-list/prestation-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-prestation',
-  imports: [CommonModule, PrestationListComponent, FormsModule, RouterModule],
+  imports: [CommonModule, PrestationListComponent, FormsModule, RouterModule, ReactiveFormsModule],
   templateUrl: './prestation.component.html',
   styleUrl: './prestation.component.css'
 })
@@ -21,12 +22,21 @@ export class PrestationComponent implements OnInit {
   limit = 10;
   total = 10;
   isLoading = true;
-
+  searchControl = new FormControl('');
 
   constructor(private prestationService: PrestationService, public authService: AuthService){}
 
   ngOnInit(): void {
     this.loadPrestations();
+
+    this.searchControl.valueChanges
+    .pipe(
+      debounceTime(500),        // Wait 500ms after each keystroke
+      distinctUntilChanged()    // Only emit if value changed
+    )
+    .subscribe((searchTerm: any) => {
+      this.filterData(searchTerm);
+    });
   }
 
   changePage(event: any){
@@ -55,8 +65,9 @@ export class PrestationComponent implements OnInit {
     });
   }
 
-  filterData(): void{
-    this.loadPrestations({search: this.searchTerm});
+  filterData(searchTerm: any): void{
+    this.searchTerm = searchTerm;
+    this.loadPrestations({search: searchTerm});
   }
 
   deleteService(serviceId: string): void{

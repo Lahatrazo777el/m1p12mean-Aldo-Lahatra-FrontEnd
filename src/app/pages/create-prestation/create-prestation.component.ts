@@ -11,11 +11,22 @@ import { Router } from '@angular/router';
 })
 export class CreatePrestationComponent {
   prestation = {name: '', price: '', duration: '00:00'};
+  errorMsg: string = '';
 
   constructor(private prestationService: PrestationService, private router: Router) {}
 
   onSubmit():void {
-    this.prestationService.addPrestation(this.prestation).subscribe(() => this.router.navigate(['/prestations']))
+    this.prestationService.addPrestation(this.prestation).subscribe({
+      next: () => {
+        this.router.navigate(['/prestations']);
+      },
+      error: (error) => {
+
+        if(error.status == 400){
+          this.errorMsg = error.error.message;
+        }
+      }
+    })
    
   }
 }
