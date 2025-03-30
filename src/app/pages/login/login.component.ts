@@ -21,7 +21,7 @@ export class LoginComponent {
     this.authService.login(this.mail, this.pswd).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
-        this.router.navigate(['/user']);
+        this.router.navigate(['/prestations']);
       },
       error: (error) => {
         alert(error.error.message || 'Erreur de connexion');

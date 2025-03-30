@@ -17,6 +17,12 @@ export class UserComponent implements OnInit {
 
   utilisateurs: any[] = [];
   filteredUsers: any[] = [];
+
+  paginatedUsers: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 1;
+
   roles: any[] = [];
   selectedRole: string = '';
   newUser = {
@@ -34,6 +40,8 @@ export class UserComponent implements OnInit {
       next: (data) => {
         this.utilisateurs = data;
         this.filteredUsers = data;
+        this.totalPages = Math.ceil(this.filteredUsers.length / this.itemsPerPage);
+        this.updatePaginatedUsers();
       },
       error: (err) => {
         console.error('Erreur lors de la récupération des utilisateurs', err);
@@ -50,10 +58,30 @@ export class UserComponent implements OnInit {
     });
   }
 
+  updatePaginatedUsers() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedUsers = this.filteredUsers.slice(startIndex, endIndex);
+  }
+
+  changePage(direction: 'next' | 'previous') {
+    if (direction === 'next' && this.currentPage < this.totalPages) {
+      this.currentPage++;
+    } else if (direction === 'previous' && this.currentPage > 1) {
+      this.currentPage--;
+    }
+    this.updatePaginatedUsers();
+  }
+
   filterByRole() {
-    this.filteredUsers = this.selectedRole
-      ? this.utilisateurs.filter(user => user.role?._id === this.selectedRole)
-      : this.utilisateurs;
+    if (this.selectedRole) {
+      this.filteredUsers = this.utilisateurs.filter(user => user.role?._id === this.selectedRole);
+    } else {
+      this.filteredUsers = this.utilisateurs;
+    }
+    this.totalPages = Math.ceil(this.filteredUsers.length / this.itemsPerPage);
+    this.currentPage = 1;
+    this.updatePaginatedUsers();
   }
 
   openEditModal(user: any) {

@@ -43,4 +43,16 @@ export class DashboardService {
   loadMecanicienPerf():Observable<any>{
     return this.http.get(`${this.apiUrl}/mecanicien-performance`); 
   } 
+  getCountUser(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/count-user`);
+  }
+  getMecanicienDispoNow(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/mecanicien-dispo`);
+  }
+  getCountClientPerMonth(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/count-client`);
+  }
+  getCountRendezVousPerMonth(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/count-rdv`);
+  }
 }

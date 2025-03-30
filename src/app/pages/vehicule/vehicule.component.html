@@ -50,7 +50,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let vec of vehicule" class="border-b hover:bg-gray-100">
+            <tr *ngFor="let vec of paginatedVehicules" class="border-b hover:bg-gray-100">
               <td class="py-2 px-6 font-semibold">{{ vec.name }}</td>
               <td class="py-2 px-6 font-semibold">{{ vec.number }}</td>
               <td class="py-2 px-6 font-semibold">{{ vec.user?.name }}</td>
@@ -62,4 +62,21 @@
           </tbody>
         </table>
       </div>
+      <div *ngIf="vehicule.length > 5" class="flex justify-between items-center mt-6 bg-gray-100 p-4 rounded-lg shadow-md">
+        <button (click)="changePage('previous')" 
+                [disabled]="currentPage === 1" 
+                class="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-300">
+            Précédent
+        </button>
+        
+        <span class="text-xl font-semibold text-gray-700">
+            Page {{ currentPage }} sur {{ totalPages }}
+        </span>
+        
+        <button (click)="changePage('next')" 
+                [disabled]="currentPage === totalPages" 
+                class="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-300">
+            Suivant
+        </button>
+    </div>
   </div>

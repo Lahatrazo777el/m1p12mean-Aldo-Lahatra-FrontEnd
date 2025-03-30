@@ -1,0 +1,30 @@
+<div class="p-6 bg-gray-100 min-h-screen">
+    <h2 class="text-2xl font-bold mb-4">
+        Liste des mécaniciens disponibles - 
+        {{ selectedDate ? (selectedDate | date:'dd/MM/yyyy') : 'Aujourd\'hui' }}
+      </h2>
+      
+      <div class="mb-4">
+        <label for="dateFilter" class="font-semibold mr-2">Filtrer par date :</label>
+        <input id="dateFilter" type="date" [(ngModel)]="selectedDate" (change)="filtrerParDate()" class="border p-2 rounded">
+      </div>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+          <thead class="bg-gray-800 text-white">
+            <tr>
+              <th class="py-3 px-6 text-left">Nom</th>
+              <th class="py-3 px-6 text-left">Prénom</th>
+              <th class="py-3 px-6 text-left">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of utilisateurs" class="border-b hover:bg-gray-100">
+              <td class="py-2 px-6 font-semibold">{{ user.name }}</td>
+              <td class="py-2 px-6 font-semibold">{{ user.surname }}</td>
+              <td class="py-2 px-6 font-semibold">{{ user.mail }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>

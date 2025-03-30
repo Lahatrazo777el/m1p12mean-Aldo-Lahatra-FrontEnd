@@ -33,8 +33,6 @@ export class AjoutRdvComponent {
   ngOnInit() {
     const token = this.authService.getToken();
     if (!token) {
-      console.error("Utilisateur non connecté !");
-      alert("Vous devez être connecté pour accéder à cette page !");
       this.router.navigate(['/login']);
       return;
     }
@@ -69,6 +67,20 @@ export class AjoutRdvComponent {
       console.error("Erreur lors du décodage du token :", err);
       this.router.navigate(['/login']);
     }
+  }
+
+  formatStatut(statut: boolean, date_annulation: string | null): string {
+    if (!statut && date_annulation != null) {
+      return '<span class="text-red-400 font-bold">Annulé</span>';
+    }
+    if (statut) {
+      return '<span class="text-green-400 font-bold">Validé</span>';
+    }
+    return '<span class="text-yellow-400 font-bold">En cours</span>';
+  }
+
+  isEnCours(statut: boolean, date_annulation: string | null): boolean {
+    return !statut && date_annulation == null;
   }
 
   formatDate(dateString: string): string {
@@ -125,6 +137,20 @@ export class AjoutRdvComponent {
     } catch (err) {
       console.error("Erreur lors du décodage du token :", err);
       alert("Erreur lors de la réservation !");
+    }
+  }
+
+  annulerRdv(id: string): void {
+    if (confirm("Êtes-vous sûr de vouloir annuler ce rendez-vous ?")) {
+      this.rdvService.deleteRdvByUser(id).subscribe({
+        next: () => {
+          window.location.reload();
+        },
+        error: (err) => {
+          console.error("Erreur lors de l'annulation :", err);
+          alert("Une erreur est survenue lors de l'annulation.");
+        }
+      });
     }
   }
 }
