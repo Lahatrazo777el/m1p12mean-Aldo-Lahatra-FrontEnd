@@ -48,7 +48,7 @@ export class AjoutRdvComponent {
 
       this.prestationService.getPrestations().subscribe({
         next: (data) => {
-          this.prestation = data;
+          this.prestation = data.data;
         },
         error: (err) => {
           console.error('Erreur lors de la récupération des prestations', err);
