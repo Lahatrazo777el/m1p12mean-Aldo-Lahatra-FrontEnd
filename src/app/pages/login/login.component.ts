@@ -14,17 +14,21 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   mail: string = '';
   pswd: string = '';
+  loading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
+    this.loading = true;
     this.authService.login(this.mail, this.pswd).subscribe({
       next: (response) => {
+        this.loading = false;
         this.authService.saveToken(response.token);
         this.router.navigate(['/prestations']);
       },
       error: (error) => {
         alert(error.error.message || 'Erreur de connexion');
+        this.loading = false;
       }
     });
   }

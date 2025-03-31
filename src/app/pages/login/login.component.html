@@ -13,7 +13,14 @@
           <label class="block text-gray-700">Mot de passe</label>
           <input [(ngModel)]="pswd" name="pswd" type="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" placeholder="Entrez votre mot de passe">
         </div>
-        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200">Se connecter</button>
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200">
+          @if(loading){
+            Chargement...
+          } @else {
+
+            Se connecter
+          }
+        </button>
       </form>
       <p class="text-center text-sm text-gray-600 mt-4">
         Pas encore de compte ? <a href="/inscription" id="toggleForm" class="text-blue-500 hover:underline">Inscrivez-vous</a>
