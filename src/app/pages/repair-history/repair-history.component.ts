@@ -50,7 +50,9 @@ export class RepairHistoryComponent implements OnInit{
   }
 
   loadRepairHistory(params?: any): void{
+    this.isLoading = true;
     const userId = this.authService.getUser().userId;
+
     if(this.authService.isClient){
       this.repairHistoryService.getRepairHistoriesClient(userId,params).subscribe({
         next: (response) => {

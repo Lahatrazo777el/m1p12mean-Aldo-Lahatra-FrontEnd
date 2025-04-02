@@ -49,6 +49,7 @@ export class RepairHistoryMecanoComponent implements OnInit {
 
 
   loadRepairHistory(params?: any): void{
+    this.isLoading = true;
     const user = this.authService.getUser();
     this.repairHistoryService.getRepairHistoriesMecano(user.userId,params).subscribe({
       next: (response) => {

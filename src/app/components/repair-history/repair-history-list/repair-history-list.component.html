@@ -14,6 +14,11 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-100">
+        <div *ngIf="isLoading">
+          Chargement...
+        </div>
+        <ng-container *ngIf="!isLoading">
+        
         <ng-container *ngIf="repairHistories.length; else noData">
             <tr *ngFor="let item of repairHistories | paginate: { itemsPerPage: 10, currentPage: page, totalItems: count }"  class="hover:bg-gray-50">
                 <td class="p-4">
@@ -99,6 +104,8 @@
             
         </ng-container>
         <ng-template #noData>No data</ng-template>
+          
+        </ng-container>
       </tbody>
       
     </table>

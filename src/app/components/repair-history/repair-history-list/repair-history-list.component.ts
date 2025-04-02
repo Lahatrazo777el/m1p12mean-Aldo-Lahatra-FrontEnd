@@ -17,7 +17,8 @@ export class RepairHistoryListComponent {
   @Input() repairHistories: any[] = [];
   @Output() reload = new EventEmitter<any>();
   @Input() page: any = 1; 
-  @Input() count: any = 1; 
+  @Input() count: any = 1;
+  @Input() isLoading: any = true; 
   isModalVisible = false;
   mecanicienId: string | null = null;
   repairHistoryId: string | null = null;

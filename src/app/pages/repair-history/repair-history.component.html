@@ -17,11 +17,9 @@
                 </a>
             </div>
           </div>
-          @if(isLoading){
-            <p>Chargement...</p>
-          } @else {
+        
     
-          <app-repair-history-list [repairHistories]="repairHistories" (reload)="loadRepairHistory()" [page]="page" [count]="total" (changePage)="changePage($event)" />   
-          }
+          <app-repair-history-list  [isLoading]="isLoading" [repairHistories]="repairHistories" (reload)="loadRepairHistory()" [page]="page" [count]="total" (changePage)="changePage($event)" />   
+          
         </div>
       </div>
