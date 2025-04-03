@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  mail: string = '';
-  pswd: string = '';
+  mail: string = 'test@gmail.com';
+  pswd: string = 'password';
   loading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
