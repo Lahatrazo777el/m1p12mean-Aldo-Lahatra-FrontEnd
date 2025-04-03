@@ -13,10 +13,13 @@ export class AuthService {
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isLoggedIn()); // Initial state
 
+  private userSubject = new BehaviorSubject<any>(this.getUser()); // Initial state
+
   private roleSubject = new BehaviorSubject<null | string>(this.getRole()); // Initial state
 
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable(); // Expose as observable
   role$ = this.roleSubject.asObservable(); // Expose as observable
+  user$ = this.userSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -28,6 +31,7 @@ export class AuthService {
     localStorage.setItem('token', token);
     this.isAuthenticatedSubject.next(true);
     this.roleSubject.next(this.getRole());
+    this.userSubject.next(this.getUser());
   }
 
   getToken(): string | null {

@@ -12,34 +12,48 @@ import { Subscription } from 'rxjs';
 })
 export class MyHeaderComponent implements OnInit {
   isMenuOpen = false;
+  isUserMenuOpen = false;
   isLoggedIn = false;
   role: string | null = null;
+  userName: string = '';
 
   private authSubscription: Subscription = new Subscription;
   private roleSubscription: Subscription = new Subscription;
+  private userSubscription: Subscription = new Subscription;
 
   constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void{
+    
     this.authSubscription = this.authService.isAuthenticated$.subscribe(
       (isAuthenticated) => {
         this.isLoggedIn = isAuthenticated;
       }
     );
 
+    this.userSubscription = this.authService.user$.subscribe((user) => {
+      this.userName = user?.name;
+    }) 
+
     this.roleSubscription = this.authService.role$.subscribe((
       role
     ) => {
       this.role = role;
     })
+
   }
 
   toggleMenu(){
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  toggleUserMenu(){
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
   logout():void {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
 }
