@@ -51,7 +51,8 @@ export class MyHeaderComponent implements OnInit {
     this.isUserMenuOpen = !this.isUserMenuOpen;
   }
 
-  logout():void {
+  logout(event : Event):void {
+    event.preventDefault();
     this.authService.logout();
     this.router.navigate(['/login']);
   }

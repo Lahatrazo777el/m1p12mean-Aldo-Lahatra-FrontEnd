@@ -9,7 +9,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     auth.logout();
     
     alert("Vous devez être connecté pour accéder à cette page !");
-    router.navigateByUrl('/login')
+    router.navigate(['/login'])
     return false
   }
   

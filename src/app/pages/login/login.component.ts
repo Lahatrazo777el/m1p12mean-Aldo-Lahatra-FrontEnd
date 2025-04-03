@@ -24,7 +24,7 @@ export class LoginComponent {
       next: (response) => {
         this.loading = false;
         this.authService.saveToken(response.token);
-        this.router.navigate(['/prestations']);
+        this.router.navigate(['/home']);
       },
       error: (error) => {
         alert(error.error.message || 'Erreur de connexion');
