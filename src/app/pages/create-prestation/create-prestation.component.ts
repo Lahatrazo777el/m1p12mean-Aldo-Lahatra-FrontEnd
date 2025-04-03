@@ -12,10 +12,12 @@ import { Router } from '@angular/router';
 export class CreatePrestationComponent {
   prestation = {name: '', price: '', duration: '00:00'};
   errorMsg: string = '';
+  isAdding = false;
 
   constructor(private prestationService: PrestationService, private router: Router) {}
 
   onSubmit():void {
+    this.isAdding = true;
     this.prestationService.addPrestation(this.prestation).subscribe({
       next: () => {
         this.router.navigate(['/prestations']);
@@ -25,6 +27,7 @@ export class CreatePrestationComponent {
         if(error.status == 400){
           this.errorMsg = error.error.message;
         }
+        this.isAdding = false;
       }
     })
    

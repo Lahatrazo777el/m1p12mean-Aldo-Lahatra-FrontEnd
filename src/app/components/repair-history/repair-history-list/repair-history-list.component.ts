@@ -25,6 +25,7 @@ export class RepairHistoryListComponent {
   avis = {note: '', commentaire: '', clientId: '', mecanicienId: '', repairHistoryId: ''};
 
   errorMsg = '';
+  isAdding = false;
 
   @Output() changePage = new EventEmitter <Number>();
 
@@ -41,6 +42,7 @@ export class RepairHistoryListComponent {
   }
 
   addAvis(): void {
+    this.isAdding = true;
     if(this.mecanicienId) this.avis.mecanicienId = this.mecanicienId;
     if(this.repairHistoryId) this.avis.repairHistoryId = this.repairHistoryId;
     this.avis.clientId = this.authService.getUser().userId;
@@ -48,13 +50,15 @@ export class RepairHistoryListComponent {
     this.avisService.addAvis(this.avis).subscribe({
       next: () => {
         this.hideModal();
-        this.reload.emit();
+        this.isAdding = false;
+        this.reload.emit(); 
       },
       error: (error) => {
         console.error('Erreur lors de l\'ajout de l\'avis:', error);
         if(error.status == 400){
           this.errorMsg = error.error.message;
         }
+        this.isAdding = false;
       }
     });   
   }

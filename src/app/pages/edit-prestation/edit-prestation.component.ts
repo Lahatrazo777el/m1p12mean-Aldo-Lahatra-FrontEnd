@@ -14,6 +14,7 @@ export class EditPrestationComponent implements OnInit{
   prestationId: null | string = null;
 
   errorMsg: string = '';
+  isAdding = false;
 
   constructor(private route: ActivatedRoute, private prestationService: PrestationService, private router: Router){}
 
@@ -37,6 +38,7 @@ export class EditPrestationComponent implements OnInit{
 
   updatePrestation(): void{
     if(this.prestationId){
+      this.isAdding = true;
       this.prestationService.updatePrestation(this.prestationId, this.prestation).subscribe({
         next: () => {
           this.router.navigate(['/prestations']);
@@ -46,6 +48,7 @@ export class EditPrestationComponent implements OnInit{
           if(error.status == 400){
             this.errorMsg = error.error.message;
           }
+          this.isAdding = false;
         }
       })
     }
