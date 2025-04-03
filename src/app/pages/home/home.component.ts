@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { PrestationService } from '@/services/prestation.service';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   prestations: any[] = [];
   days: any[] = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
 
-  constructor(private prestationService: PrestationService){}
+  constructor(private prestationService: PrestationService, public authService: AuthService){}
 
   ngOnInit(): void {
     this.loadPrestation();
