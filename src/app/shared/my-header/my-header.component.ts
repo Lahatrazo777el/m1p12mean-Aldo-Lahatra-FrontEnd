@@ -24,7 +24,10 @@ export class MyHeaderComponent implements OnInit {
   constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void{
-    
+    //initialize dropdown
+    this.isUserMenuOpen = false;
+    this.isMenuOpen = false;
+
     this.authSubscription = this.authService.isAuthenticated$.subscribe(
       (isAuthenticated) => {
         this.isLoggedIn = isAuthenticated;
