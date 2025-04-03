@@ -31,8 +31,9 @@
                 <span class="text-white">{{ user.mail }}</span>
               </div>
               <div class="flex">
-                <span class="text-gray-400 w-24">Véhicules :</span>
+                <span class="text-gray-400 w-24">Véhicules : {{ vehicules.length }}</span>
             </div>
+            <p *ngIf="vehiculeIsLoading" class="ml-4 text-white">Chargement...</p>
             @for (item of vehicules; track $index) {
 
                 <p class="ml-4 text-white">{{ item.name }}</p>

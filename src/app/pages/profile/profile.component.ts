@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit{
   public user: any = null;
   initials: string = '';
   isLoading = true;
+  vehiculeIsLoading = true;
   vehicules: any[] = [];
 
   private userSubscription: Subscription = new Subscription;
@@ -52,6 +53,10 @@ export class ProfileComponent implements OnInit{
   }
 
   getVehicule(){
-    this.vehiculeService.findVehicule(this.userId).subscribe(data => this.vehicules = data)
+    this.vehiculeIsLoading =  true;
+    this.vehiculeService.findVehicule(this.userId).subscribe(data => {
+      this.vehicules = data
+      this.vehiculeIsLoading = false;
+    })
   }
 }
