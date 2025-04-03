@@ -22,6 +22,7 @@ import { MecanicienDispoComponent } from './pages/mecanicien-dispo/mecanicien-di
 import { ShowRepairHistoryComponent } from './pages/show-repair-history/show-repair-history.component';
 import { RepairHistoryMecanoComponent } from './pages/repair-history-mecano/repair-history-mecano.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -48,7 +49,8 @@ export const routes: Routes = [
           { path: 'ajout-rendezvous', component: AjoutRdvComponent},
           { path: 'rendezvous', component: DetailRdvComponent},
           { path: 'mecanicien-disponible', component: MecanicienDispoComponent },
-          { path: 'dashboard', component: DashboardComponent },
+          { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+          { path: 'profile', component: ProfileComponent , canActivate: [authGuard]},
           { path: '', redirectTo: '/home', pathMatch: 'full'},
         ]
     },
