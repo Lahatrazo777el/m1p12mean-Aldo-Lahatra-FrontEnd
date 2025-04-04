@@ -24,11 +24,15 @@
 
                     <p class="text-gray-600 mb-4">Mecanicien: {{ repairHistory?.mecanicien?.name }} </p>
                   </div>
+                  <div class="prose max-w-none ">
+
+                    <p class="text-gray-600 mb-4">Prix net: {{ repairHistory?.price?.$numberDecimal }} Ariary </p>
+                  </div>
                 <div class="prose max-w-none">
                     <h2 class="text-xl font-bold mb-4">Prestation:</h2>
                 
                   <p>Désignation: {{ repairHistory?.prestation?.name }}</p>
-                  <p>Prix: {{ repairHistory?.prestation?.price?.$numberDecimal }} Ariary</p>
+                  <p>Prix brut: {{ repairHistory?.prestation?.price?.$numberDecimal }} Ariary</p>
                 </div>
   
 

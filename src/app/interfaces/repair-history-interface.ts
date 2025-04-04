@@ -11,4 +11,7 @@ export interface RepairHistoryInterface {
     avis: AvisInterface;
     prestation: PrestationInterface;
     createdAt: Date;
+    price: {
+        $numberDecimal: string
+    }
 }
