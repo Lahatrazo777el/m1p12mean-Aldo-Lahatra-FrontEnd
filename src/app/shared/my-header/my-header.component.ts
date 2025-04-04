@@ -27,6 +27,10 @@ export class MyHeaderComponent implements OnInit {
 
     this.authSubscription = this.authService.isAuthenticated$.subscribe(
       (isAuthenticated) => {
+        //reset dropdown
+        this.isMenuOpen = false;
+        this.isUserMenuOpen = false;
+        
         this.isLoggedIn = isAuthenticated;
       }
     );
