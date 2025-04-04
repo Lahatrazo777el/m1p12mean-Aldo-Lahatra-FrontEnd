@@ -1,0 +1,63 @@
+<div class="bg-gray-900 ">
+
+        <p class="text-white text-2xl text-center pt-3" >Extrait de nos réalisations</p>
+    
+    <div class="min-h-screen flex items-center justify-center pb-4">
+        <div class="w-full max-w-5xl">
+          <div class="relative">
+            <!-- Main Image -->
+            <div class="relative h-[600px] overflow-hidden rounded-xl">
+              <img 
+                *ngFor="let image of images; let i = index"
+                [src]="image" 
+                [class.hidden]="currentIndex !== i"
+                class="absolute w-full h-full object-cover"
+                alt="Car Image"
+              />
+      
+              <!-- Navigation Arrows -->
+              <button 
+                (click)="prev()" 
+                class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white p-3 rounded-full transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              <button 
+                (click)="next()" 
+                class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white p-3 rounded-full transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+      
+              <!-- Dots Navigation -->
+              <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                <button 
+                  *ngFor="let image of images; let i = index"
+                  (click)="currentIndex = i"
+                  class="w-3 h-3 rounded-full transition-all"
+                  [ngClass]="{ 'bg-white': currentIndex === i, 'bg-white/50' : currentIndex !== i, 'hover:bg-white/75' : currentIndex !== i}"
+                  >
+                </button>
+              </div>
+            </div>
+      
+            <!-- Thumbnails -->
+            <div class="flex space-x-2 mt-4 overflow-x-auto pb-2">
+              <button 
+                *ngFor="let image of images; let i = index"
+                (click)="currentIndex = i"
+                class="relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden transition-all"
+                [class.ring-2]="currentIndex === i"
+                [class.ring-white]="currentIndex === i"
+                [class.opacity-50]="currentIndex !== i"
+                [class.hover:opacity-75]="currentIndex !== i">
+                <img [src]="image" class="w-full h-full object-cover" alt="Car Thumbnail" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
