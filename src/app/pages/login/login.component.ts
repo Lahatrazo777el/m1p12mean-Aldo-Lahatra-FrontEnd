@@ -15,8 +15,27 @@ export class LoginComponent {
   mail: string = 'test@gmail.com';
   pswd: string = 'password';
   loading: boolean = false;
+  selectedOption: string = 'client';
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  onOptionChange() {
+    this.changeLoginCredentials(this.selectedOption);
+  }
+
+  changeLoginCredentials(value: string){
+    switch(value){
+      case 'client':
+        this.mail = 'test@gmail.com';
+        break;
+      case 'mecanicien':
+        this.mail = 'test.mecanicien@gmail.com';
+        break;
+      default:
+        this.mail = 'test.manager@gmail.com';
+        break;
+    }
+  }
 
   onSubmit(): void {
     this.loading = true;

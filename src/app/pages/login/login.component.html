@@ -14,6 +14,19 @@
           <label class="block text-gray-700">Mot de passe</label>
           <input [(ngModel)]="pswd" name="pswd" type="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" placeholder="Entrez votre mot de passe">
         </div>
+        <div class="">
+          <label>
+            <input type="radio" name="option" value="client" [(ngModel)]="selectedOption" (change)="onOptionChange()"> Client
+          </label>
+        
+          <label>
+            <input type="radio" name="option" value="mecanicien" [(ngModel)]="selectedOption" (change)="onOptionChange()"> Mécanicien
+          </label>
+        
+          <label>
+            <input type="radio" name="option" value="manager" [(ngModel)]="selectedOption" (change)="onOptionChange()"> Manager
+          </label>
+        </div>
         <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200">
           @if(loading){
             Chargement...
